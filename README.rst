@@ -1,7 +1,7 @@
-doctypehtml5.in
-===============
+GeekUp
+======
 
-Source code and templates for the website http://www.doctypehtml5.in/. To run this as a test server, simply use::
+Source code and templates for the website http://geekup.in/. To run this as a test server, simply use::
 
    python website.py
 
@@ -19,6 +19,8 @@ BSD and Creative Commons Attribution 3.0. See ``LICENSE.txt``.
 
 Deployment
 ----------
+
+These are older instructions for the DocType HTML5 website, but should still apply.
 
 The website is currently hosted at Dreamhost using the Passenger WSGI gateway.
 To reproduce this setup, create a domain using the Dreamhost panel, then

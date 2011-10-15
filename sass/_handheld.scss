@@ -1,0 +1,17 @@
+@media all and (orientation:portrait) { 
+  
+}
+
+@media all and (orientation:landscape) { 
+  
+}
+
+@media screen and (max-device-width: 480px) {
+    #about-text {
+        @include column-count(1);
+        p {
+            margin-bottom: 1em;
+        }
+    }
+  /* html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; } */
+}

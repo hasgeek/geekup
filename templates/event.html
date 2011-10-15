@@ -1,0 +1,151 @@
+{% extends "layout.html" %}
+{% from 'macros.html' import ajaxform %}
+{% block title %}GeekUp{% endblock %}
+{% block main %}
+<article id="about">
+  <div class="content">
+    <div id="about-banner">
+      <h2>Divya Manian</h2>
+    </div>
+    <div id="picture-frame">
+      <img src="http://farm1.static.flickr.com/119/250595337_9d64da93d2.jpg"/>
+    </div>
+    <div id="about-bio">
+      <p>
+        Divya Manian is a web opener for Opera Software in Seattle. She made
+        the jump from developing device drivers for Motorola phones to
+        designing websites and has not looked back since. She takes her duties
+        as an Open Web vigilante seriously which has resulted in collaborative
+        projects such as <a href="http://html5boilerplate.com/">HTML5 Boilerplate</a>.
+      </p>
+    </div>
+    <div id="about-text">
+      <h2>HTML5 Boilerplate</h2>
+      <p>
+        In this talk, you will learn  how you can use HTML5 Boilerplate to get
+        your projects up and running quickly while keeping best practices
+        covered.
+      </p>
+      <p>
+        Divya will start with an overview of HTML5 Boilerplate before diving
+        into some examples and demos to give you a feel for how you can
+        jumpstart your next project with HTML5 Boilerplate.
+      </p>
+      <p>
+        Bangalore's own web geeks will open the evening with presentations on their work.
+      </p>
+    </div>
+  </div>
+</article>
+<div id="color-transition-2">
+  <article id="schedule">
+    <div class="content">
+      <div id="meghaman"><!-- --></div>
+      <h3>Tuesday, 18 October 2011, Bangalore</h3>
+      <div id="schedule-table">
+        <div class="schedule-slot">
+          <div class="icon">
+            <img src="{{ url_for('static', filename='img/schedule/break.png') }}" width="24" height="24" alt="Icon"/>
+          </div>
+          <div class="title">
+            Welcome, with tea and light snacks
+          </div>
+          <div class="time">05:45 PM – 06:00 PM</div>
+        </div>
+        <div class="schedule-slot">
+          <div class="icon">
+            <img src="{{ url_for('static', filename='img/schedule/lecture.png') }}" width="24" height="24" alt="Icon"/>
+          </div>
+          <div class="title">
+            Presentations
+          </div>
+          <div class="speaker">
+            Various
+          </div>
+          <div class="time">06:00 PM – 07:00 PM</div>
+        </div>
+        <div class="schedule-slot">
+          <div class="icon">
+            <img src="{{ url_for('static', filename='img/schedule/lecture.png') }}" width="24" height="24" alt="Icon"/>
+          </div>
+          <div class="title">
+            HTML5 Boilerplate
+          </div>
+          <div class="speaker">
+            Divya Manian
+          </div>
+          <div class="time">07:00 PM – 08:00 PM</div>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article id="register">
+    <div class="content">
+      <div id="register-now">
+        <h2>Register now<span class="exspace">&nbsp;</span><span class="arrow">&rarr;</span></h2>
+        <h3>The venue has limited capacity</h3>
+        <p>
+          Fill out the form to confirm your interest. We have limited space at the venue and
+          may not be able to accommodate everyone. Registration will allow us to keep you
+          updated about the talk. Do tell us something about yourself so we know
+          whom we are expecting.
+        </p>
+        <p>
+          <strong>Our privacy policy:</strong> We do not share your info.
+        </p>
+      </div>
+      <div id="register-form">
+        {% include 'regform.html' %}
+      </div>
+    </div>
+  </article>
+</div>
+<article id="venue">
+  <div class="content" id="hoarding">
+    <div id="venue-map"><!-- --></div>
+    <div id="venue-text">
+      <h2>The Energy and Research Institute</h2>
+      <p>
+        4th Main, 2nd Cross, Domlur 2nd Stage, Bangalore - 560 071
+      </p>
+      <p>
+        The talk will be at TERI's cozy auditorium in Domlur, on a quiet lane
+        away from the buzz of Indiranagar's 100 ft main road. There's plenty of
+        parking on the lanes around TERI, but not within the campus.
+      </p>
+    </div>
+  </div>
+</article>        
+{% endblock %}
+{% block footerscripts %}
+
+<!-- Ajax form -->
+{% from "macros.html" import ajaxform -%}
+{{ ajaxform('regform', request, True) }}
+
+<!-- Map -->
+<script type="text/javascript">
+  var latlng = new google.maps.LatLng(12.9637, 77.6378);
+  var mapOptions = {
+    zoom: 14,
+    center: latlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  var map = new google.maps.Map(document.getElementById("venue-map"), mapOptions);
+  var marker = new google.maps.Marker({
+    position: latlng,
+    map: map,
+    title: "The Energy and Research Institute"
+  });
+  var infowindow = new google.maps.InfoWindow({
+    content: '<a target="_blank" href="http://g.co/maps/5hdv2">The Energy and Research Institute</a>'
+  });
+  google.maps.event.addListener(marker, 'click', function() {
+    infowindow.open(map, marker);
+  });
+  $(window).load(function() {
+    infowindow.open(map, marker);
+  });
+</script>
+
+{% endblock %}

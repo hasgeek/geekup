@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Website server for doctypehtml5.in
+Website server for geekup.in
 """
 
 from __future__ import with_statement
@@ -14,6 +14,7 @@ import re
 from flask import Flask, abort, request, render_template, redirect, url_for
 from flask import flash, session, g, Response
 from werkzeug import generate_password_hash, check_password_hash, UserAgent
+from flaskext.assets import Environment, Bundle
 from flaskext.sqlalchemy import SQLAlchemy
 from flaskext.mail import Mail, Message
 from flaskext.wtf import Form, TextField, TextAreaField, PasswordField
@@ -29,6 +30,18 @@ except ImportError:
 app = Flask(__name__)
 db = SQLAlchemy(app)
 mail = Mail()
+assets = Environment(app)
+
+# ---------------------------------------------------------------------------
+# Assets
+
+js = Bundle('js/libs/jquery-1.6.4.js',
+            'js/libs/jquery.form.js',
+            'js/scripts.js',
+            filters='jsmin', output='js/packed.js')
+
+assets.register('js_all', js)
+
 
 # ---------------------------------------------------------------------------
 # Static data
@@ -43,34 +56,14 @@ USER_CATEGORIES = [
     ('6', u'Entrepreneur'),
     ]
 
-USER_CITIES = [
-    ('', ''),
-    ('bangalore', 'Bangalore - October 9, 2010 (over!)'),
-    ('chennai', 'Chennai - November 27, 2010 (over!)'),
-    ('pune', 'Pune - December 4, 2010 (over!)'),
-    ('hyderabad', 'Hyderabad - January 23, 2011 (over!)'),
-    ('ahmedabad', 'Ahmedabad - February 5, 2011 (over!)'),
-    ]
-
-TSHIRT_SIZES = [
-    ('',  u''),
-    ('1', u'XS'),
-    ('2', u'S'),
-    ('3', u'M'),
-    ('4', u'L'),
-    ('5', u'XL'),
-    ('6', u'XXL'),
-    ('7', u'XXXL'),
-    ]
-
 REFERRERS = [
     ('',   u''),
     ('1',  u'Twitter'),
     ('2',  u'Facebook'),
     ('3',  u'LinkedIn'),
-    ('10', u'Discussion Group or List'),
+    ('5',  u'Google Plus'),
     ('4',  u'Google/Bing Search'),
-    ('5',  u'Google Buzz'),
+    ('10', u'Discussion Group or List'),
     ('6',  u'Blog'),
     ('7',  u'Email/IM from Friend'),
     ('8',  u'Colleague at Work'),
@@ -140,20 +133,16 @@ class Participant(db.Model):
     fullname = db.Column(db.Unicode(80), nullable=False)
     #: User's email address
     email = db.Column(db.Unicode(80), nullable=False)
-    #: Edition of the event they'd like to attend
-    edition = db.Column(db.Unicode(80), nullable=False)
+    #: Event they'd like to attend
+    event = db.Column(db.Unicode(80), nullable=False)
     #: User's company name
     company = db.Column(db.Unicode(80), nullable=False)
     #: User's job title
     jobtitle = db.Column(db.Unicode(80), nullable=False)
     #: User's twitter id (optional)
     twitter = db.Column(db.Unicode(80), nullable=True)
-    #: T-shirt size (XS, S, M, L, XL, XXL, XXXL)
-    tshirtsize = db.Column(db.Integer, nullable=False, default=0)
     #: How did the user hear about this event?
     referrer = db.Column(db.Integer, nullable=False, default=0)
-    #: User's reason for wanting to attend
-    reason = db.Column(db.Text, nullable=False)
     #: User category, defined by a reviewer
     category = db.Column(db.Integer, nullable=False, default=0)
     #: User agent with which the user registered
@@ -169,19 +158,17 @@ class Participant(db.Model):
     #: Y = Yes, Attending
     #: M = Maybe Attending
     #: N = Not Attending
-    rsvp = db.Column(db.Unicode(1), default='A', nullable=False)
+    rsvp = db.Column(db.Unicode(1), default=u'A', nullable=False)
     #: Did the participant attend the event?
     attended = db.Column(db.Boolean, default=False, nullable=False)
     #: Datetime the participant showed up
     attenddate = db.Column(db.DateTime, nullable=True)
-    #: Did the participant agree to subscribe to the newsletter?
-    subscribe = db.Column(db.Boolean, default=False, nullable=False)
     #: User_id
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True, unique=False)
     #: Link to user account
     user = db.relation('User', backref='participants')
 
-
+# FIXME: When we switch to using LastUser, migrating this is going to be a problem.
 class User(db.Model):
     """
     User account. This is different from :class:`Participant` because the email
@@ -224,24 +211,12 @@ class User(db.Model):
 
 
 class RegisterForm(Form):
-    fullname = TextField('Full name', validators=[Required()])
-    email = TextField('Email address', validators=[Required(), Email()])
-    edition = SelectField('Edition', validators=[Required()], choices=USER_CITIES)
-    company = TextField('Company name (or school/college)', validators=[Required()])
-    jobtitle = TextField('Job title', validators=[Required()])
-    twitter = TextField('Twitter id (optional)')
-    tshirtsize = SelectField('T-shirt size', validators=[Required()], choices=TSHIRT_SIZES)
-    referrer = SelectField('How did you hear about this event?', validators=[Required()], choices=REFERRERS)
-    reason = TextAreaField('Your reasons for attending', validators=[Required()])
-
-    def validate_edition(self, field):
-        if hasattr(self, '_venuereg'):
-            if field.data != self._venuereg:
-                raise ValidationError, "You can't register for that"
-            else:
-                return # Register at venue even if public reg is closed
-        if field.data in [u'bangalore', u'chennai', u'pune', u'hyderabad', u'ahmedabad']:
-            raise ValidationError, "Registrations are closed for this edition"
+    fullname = TextField('Full name', validators=[Required("Your name is required")])
+    email = TextField('Email address', validators=[Required("Your email address is required"), Email()])
+    company = TextField('Company name')
+    jobtitle = TextField('Job title')
+    twitter = TextField('Twitter id')
+    referrer = SelectField('How did you hear about this event?', choices=REFERRERS)
 
 
 class AccessKeyForm(Form):
@@ -272,15 +247,19 @@ class LoginForm(Form):
 # ---------------------------------------------------------------------------
 # Routes
 
-@app.route('/', methods=['GET'])
+@app.route('/')
+def index():
+    return redirect(url_for('event'))
+
+# TODO: Hardcoded route for initial version. Replace this
+@app.route('/2011/nimbupani', methods=['GET'])
 @getuser
-def index(**forms):
+def event(**forms):
     regform = forms.get('regform', RegisterForm())
     loginform = forms.get('loginform', LoginForm())
-    return render_template('index.html',
+    return render_template('event.html',
                            regform=regform,
-                           loginform=loginform,
-                           gallery_sections=GALLERY_SECTIONS)
+                           loginform=loginform,)
 
 
 @app.route('/sitemap.xml')
@@ -332,7 +311,7 @@ def logout():
     return redirect(url_for('index'), code=303)
 
 
-@app.route('/rsvp/<edition>')
+@app.route('/rsvp/<event>')
 def rsvp(edition):
     key = request.args.get('key')
     choice = request.args.get('rsvp')
@@ -383,12 +362,13 @@ def adsense():
 # ---------------------------------------------------------------------------
 # Form submission
 
-@app.route('/', methods=['POST'])
+# TODO: Replace hardcoded URL
+@app.route('/2011/nimbupani', methods=['POST'])
 def submit():
     # There's only one form, so we don't need to check which one was submitted
     formid = request.form.get('form.id')
     if formid == 'regform':
-        return submit_register()
+        return submit_register('2011/nimbupani')
     elif formid == 'login':
         return submit_login()
     else:
@@ -396,13 +376,14 @@ def submit():
         redirect(url_for('index'), code=303)
 
 
-def submit_register():
+def submit_register(eventname):
     # This function doesn't need parameters because Flask provides everything
     # via thread globals.
     form = RegisterForm()
     if form.validate_on_submit():
         participant = Participant()
         form.populate_obj(participant)
+        participant.event = eventname
         participant.ipaddr = request.environ['REMOTE_ADDR']
         participant.useragent = request.user_agent.string
         db.session.add(participant)
@@ -414,7 +395,7 @@ def submit_register():
                                    regform=form, ajax_re_register=True)
         else:
             flash("Please check your details and try again.", 'error')
-            return index(regform=form)
+            return event(regform=form)
 
 
 def submit_login():
@@ -434,7 +415,7 @@ def submit_login():
                                    loginform=form, ajax_re_register=True)
         else:
             flash("Please check your details and try again", 'error')
-            return index(loginform=form)
+            return event(loginform=form)
 
 
 # ---------------------------------------------------------------------------
@@ -880,4 +861,5 @@ if __name__ == '__main__':
     if MailChimp is None:
         import sys
         print >> sys.stderr, "greatape is not installed. MailChimp support will be disabled."
+    app.config['ASSETS_DEBUG'] = True
     app.run('0.0.0.0', 4000, debug=True)
