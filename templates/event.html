@@ -37,7 +37,7 @@
     </div>
   </div>
 </article>
-<div id="color-transition-2">
+<div id="sky-transition">
   <article id="schedule">
     <div class="content">
       <div id="meghaman"><!-- --></div>
@@ -85,10 +85,10 @@
         <h2>Register now<span class="exspace">&nbsp;</span><span class="arrow">&rarr;</span></h2>
         <h3>The venue has limited capacity</h3>
         <p>
-          Fill out the form to confirm your interest. We have limited space at the venue and
-          may not be able to accommodate everyone. Registration will allow us to keep you
-          updated about the talk. Do tell us something about yourself so we know
-          whom we are expecting.
+          Fill out the form to confirm your participation. We have limited space at the
+          venue and may not be able to accommodate everyone. Registration will allow us
+          to keep you updated about the talk. Do tell us something about yourself so we
+          know whom we are expecting.
         </p>
         <p>
           <strong>Our privacy policy:</strong> We do not share your info.
@@ -97,6 +97,12 @@
       <div id="register-form">
         {% include 'regform.html' %}
       </div>
+    </div>
+  </article>
+  <article id="sponsors">
+    <div class="content">
+      <h3>Supported by</h3>
+      <a href="http://www.cis-india.org/"><img src="{{ url_for('static', filename='img/cis.png') }}" alt="The Centre for Internet and Society"/></a>
     </div>
   </article>
 </div>

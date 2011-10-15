@@ -707,7 +707,7 @@ hr {
   margin: 2em 0;
 }
 
-#color-transition-2 {
+#sky-transition {
   background-color: #bceef7;
   background-image: url('../img/gradient2.svg?1308068363');
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5abcec), color-stop(100%, #bceef7));
@@ -917,6 +917,14 @@ article:hover .exspace {
   -webkit-transition-duration: 0.25s;
   -o-transition-duration: 0.25s;
   transition-duration: 0.25s;
+}
+
+#sponsors {
+  text-align: center;
+  padding-bottom: 5em;
+}
+#sponsors h3 {
+  margin-bottom: 1em;
 }
 
 #hoarding {
