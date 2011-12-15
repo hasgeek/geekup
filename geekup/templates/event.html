@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+{% from 'macros.html' import ajaxform, render_schedule %}
+{% block title %}GeekUp{% endblock %}
+{% block main %}
+<article id="about">
+  <div class="content">
+    <div id="about-banner">
+      <h2>{{ event.speakers[0].title }}</h2>
+    </div>
+    <div id="picture-frame">
+      <img src="{{ url_for('static', filename='img/%s' % (event.speakers[0].photo)) }}"/>
+    </div>
+    <div id="about-bio">
+      {{ speaker_bio }}
+    </div>
+    <div id="about-text">
+      <h2>{{ event.title}}</h2>
+      {{ event_description }}
+    </div>
+  </div>
+</article>
+<div id="sky-transition">
+  {% if schedule_data %}
+  <article id="schedule">
+    <div class="content">
+      <div id="meghaman"><!-- --></div>
+      <h3>{{ event_date }}, {{ event.city }}</h3>
+      {{ render_schedule(schedule_data) }}
+    </div>
+  </article>
+  {% endif %}
+  <article id="register">
+    <div class="content">
+        {% if event.status %}
+      <div id="register-now">
+        <h2>Register now<span class="exspace">&nbsp;</span><span class="arrow">&rarr;</span></h2>
+        <h3>The venue has limited capacity</h3>
+        <p>
+          Fill out the form to confirm your participation. We have limited space at the
+          venue and may not be able to accommodate everyone. Registration will allow us
+          to keep you updated about the talk. Do tell us something about yourself so we
+          know whom we are expecting.
+        </p>
+        <p>
+          <strong>Our privacy policy:</strong> We do not share your info.
+        </p>
+      </div>
+      <div id="register-form">
+        {% include 'regform.html' %}
+      </div>
+      {% endif %}
+    </div>
+    </article>
+  {% if event.sponsors %}
+  <article id="sponsors">
+    <div class="content">
+      <h3>Supported by</h3>
+      {% for sponsor in event.sponsors %}
+      <a href="{{ sponsor.url }}" title="{{ sponsor.title }}"><img src="{{ url_for('static', filename='img/%s' % sponsor.photo) }}" alt="{{ sponsor.title }}"/></a>
+      {% endfor %}
+    </div>
+    </article>
+    {% endif %}
+</div>
+<article id="venue">
+  <div class="content" id="hoarding">
+    <div id="venue-map"><!-- --></div>
+    <div id="venue-text">
+      <h2>{{ event.venue.title }}</h2>
+      <p>{{ event.venue.address }}</p>
+      {{ venue_description }}
+    </div>
+  </div>
+</article>        
+{% endblock %}
+{% block footerscripts %}
+
+<!-- Ajax form -->
+{% from "macros.html" import ajaxform -%}
+{{ ajaxform('regform', request, True) }}
+
+<!-- Map -->
+<script type="text/javascript">
+  var latlng = new google.maps.LatLng({{ event.venue.lat }}, {{ event.venue.lng }});
+  var mapOptions = {
+    zoom: 14,
+    center: latlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  var map = new google.maps.Map(document.getElementById("venue-map"), mapOptions);
+  var marker = new google.maps.Marker({
+    position: latlng,
+    map: map,
+    title: "{{event.venue.title}}"
+  });
+  var infowindow = new google.maps.InfoWindow({
+    content: '<strong>{{ event.venue.title }}</strong><p>{{ event.venue.address }}</p>'
+  });
+  google.maps.event.addListener(marker, 'click', function() {
+    infowindow.open(map, marker);
+  });
+  $(window).load(function() {
+    infowindow.open(map, marker);
+  });
+</script>
+
+{% endblock %}
