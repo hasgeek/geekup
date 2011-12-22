@@ -5,7 +5,6 @@
 Website server for geekup.in
 """
 
-import re
 from flask import Flask
 from flaskext.assets import Environment, Bundle
 from flaskext.mail import Mail
@@ -32,6 +31,7 @@ assets.register('js_all', js)
 
 import geekup.models
 import geekup.views
+import geekup.loghandler
 
 # Fourth, setup admin for the models
 
