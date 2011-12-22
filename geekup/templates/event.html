@@ -94,7 +94,7 @@
     title: "{{event.venue.title}}"
   });
   var infowindow = new google.maps.InfoWindow({
-    content: '<strong>{{ event.venue.title }}</strong><p>{{ event.venue.address }}</p>'
+    content: '<strong>{{ event.venue.title }}</strong>'
   });
   google.maps.event.addListener(marker, 'click', function() {
     infowindow.open(map, marker);
