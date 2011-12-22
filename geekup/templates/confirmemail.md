@@ -14,5 +14,5 @@ info@hasgeek.in if you have suggestions or questions on this service.
 
 If you did not register, you may safely ignore this email and your registration will be automatically removed.
 
-Regards
+Regards  
 The non-sentient HasGeek email robot
