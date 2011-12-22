@@ -23,14 +23,14 @@ from coaster import newsecret
 @app.route('/')
 def index():
     event = Event.query.order_by('date desc').first_or_404()
-    return redirect(url_for('eventpage', eventname=event.name), 302)
+    return redirect(url_for('eventpage', year=event.year, eventname=event.name), 302)
 
 
-@app.route('/<eventname>')
-def eventpage(eventname, regform=None):
+@app.route('/<year>/<eventname>')
+def eventpage(year, eventname, regform=None):
     if regform is None:
         regform = RegisterForm()
-    event = Event.query.filter_by(name=eventname).first_or_404()
+    event = Event.query.filter_by(name=eventname, year=year).first_or_404()
     try:
         schedule_data = json.loads(event.schedule_data)
     except:
@@ -48,10 +48,10 @@ def eventpage(eventname, regform=None):
     return render_template('event.html', **context)
 
 
-@app.route('/<eventname>', methods=['POST'])
+@app.route('/<year>/<eventname>', methods=['POST'])
 def register(eventname):
     form = RegisterForm()
-    event = Event.query.filter_by(name=eventname).first()
+    event = Event.query.filter_by(name=eventname, year=year).first()
     if form.validate_on_submit():
         participant = Participant()
         form.populate_obj(participant)
