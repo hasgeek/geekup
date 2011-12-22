@@ -43,6 +43,7 @@ def eventpage(eventname, regform=None):
             'speaker_bio': Markup(event.speaker_bio),
             'event_description': Markup(event.description),
             'venue_description': Markup(event.venue.description),
+            'venue_address': Markup(event.venue.address),
             }
     return render_template('event.html', **context)
 
