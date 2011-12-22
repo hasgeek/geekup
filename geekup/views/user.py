@@ -22,7 +22,7 @@ from coaster import newsecret
 
 @app.route('/')
 def index():
-    event = Event.query.order_by('date desc').first()
+    event = Event.query.order_by('date desc').first_or_404()
     return redirect(url_for('eventpage', eventname=event.name), 302)
 
 
@@ -30,7 +30,7 @@ def index():
 def eventpage(eventname, regform=None):
     if regform is None:
         regform = RegisterForm()
-    event = Event.query.filter_by(name=eventname).first()
+    event = Event.query.filter_by(name=eventname).first_or_404()
     try:
         schedule_data = json.loads(event.schedule_data)
     except:
