@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block title %}{{ title|e }}{% endblock %}
+
+{% block header %}
+  <h1>Registration Confirmation</h1>
+{% endblock %}
+
+{% block pageheaders %}
+  <style type="text/css">
+    #container {
+      padding-top: 0;
+    }
+    #container, footer {
+      max-width: 100%;
+    }
+    
+    footer {
+      text-align: left;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <p>
+  Your registration for {{ participant.event }} on {{ participant.event.date }} at {{ participant.event.venue }} is now confirmed.  Please indicate your status below.</p>
+<div id="rsvp-form">
+{% include 'rsvpform.html' %}
+</div>
+{% endblock %}
+{% block footerscripts %}
+
+<!-- Ajax form -->
+{% from "macros.html" import ajaxform -%}
+{{ ajaxform('regform', request, True) }}
+
+<!-- Ajax form -->
+{% from "macros.html" import ajaxform %}
+{{ ajaxform('rsvpform', request, True) }}
+
+{% endblock %}

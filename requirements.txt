@@ -1,0 +1,13 @@
+Flask
+Flask-Sqlalchemy
+Flask-Assets
+Flask-Mail
+Flask-WTF
+pytz
+markdown
+pygooglechart
+https://github.com/hasgeek/coaster/zipball/master
+https://github.com/hasgeek/flask-lastuser/zipball/master
+jsmin
+greatape
+Flask-Admin

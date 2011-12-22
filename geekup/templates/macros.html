@@ -83,3 +83,19 @@
 </script>
 {%- endif %}
 {%- endmacro %}
+
+{% macro render_schedule(schedule_data) %}
+      <div id="schedule-table">
+        {% for item in schedule_data['sessions'] %}
+        <div class="schedule-slot">
+          <div class="icon">
+            <img src="{{ url_for('static', filename='img/schedule/%s.png' % (item.type)) }}" width="24" height="24" alt="Icon"/>
+          </div>
+          <div class="title">
+            {{ item.title }}
+          </div>
+          <div class="time">{{ item.time }}</div>
+        </div>
+        {% endfor %}
+      </div>
+{% endmacro %}
