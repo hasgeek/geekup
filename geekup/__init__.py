@@ -36,10 +36,11 @@ import geekup.views
 # Fourth, setup admin for the models
 
 from flask.ext import admin
+from flask.ext.admin.datastore.sqlalchemy import SQLAlchemyDatastore
 from geekup.views.login import lastuser
 
-admin_blueprint = admin.create_admin_blueprint(
-     geekup.models, geekup.models.db.session,
-     view_decorator=lastuser.requires_permission('siteadmin'))
+admin_datastore = SQLAlchemyDatastore(geekup.models, geekup.models.db.session)
+admin_blueprint = admin.create_admin_blueprint(admin_datastore,
+    view_decorator=lastuser.requires_permission('siteadmin'))
 
 app.register_blueprint(admin_blueprint, url_prefix='/admin')
