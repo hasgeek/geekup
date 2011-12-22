@@ -23,7 +23,7 @@ from coaster import newsecret
 @app.route('/')
 def index():
     event = Event.query.order_by('date desc').first()
-    return redirect(url_for('eventpage', event=event.name), 302)
+    return redirect(url_for('eventpage', eventname=event.name), 302)
 
 
 @app.route('/<eventname>')
