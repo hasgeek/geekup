@@ -25,7 +25,7 @@ class Event(db.Model, BaseMixin):
     #: Year of the event
     year = db.Column(db.Integer, default=date.today().year, nullable=False)
     #: Date of the event
-    date = db.Column(db.DateTime, nullable=False)
+    date = db.Column(db.Date, nullable=False)
     #: Description for the event
     description = db.Column(db.Text, nullable=False)
     #: Speaker Bio customized for the event

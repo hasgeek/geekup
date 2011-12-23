@@ -876,6 +876,9 @@ hr {
   clear: both;
 }
 
+#register .closed {
+  text-align: center;
+}
 #register-now {
   float: left;
   margin-right: 1em;

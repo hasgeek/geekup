@@ -8,7 +8,7 @@
       <h2>{{ event.speakers[0].title }}</h2>
     </div>
     <div id="picture-frame">
-      <img src="{{ url_for('static', filename='img/%s' % (event.speakers[0].photo)) }}"/>
+      <img src="{{ url_for('static', filename='img/%s' % (event.photo)) }}"/>
     </div>
     <div id="about-bio">
       {{ speaker_bio }}
@@ -48,6 +48,10 @@
       <div id="register-form">
         {% include 'regform.html' %}
       </div>
+      {% else %}
+      <div class="closed">
+        <h3>Registrations are closed.</h3>
+      </div>
       {% endif %}
     </div>
     </article>
@@ -67,7 +71,7 @@
     <div id="venue-map"><!-- --></div>
     <div id="venue-text">
       <h2>{{ event.venue.title }}</h2>
-      <p>{{ venue_address }}</p>
+      {{ venue_address }}
       {{ venue_description }}
     </div>
   </div>
