@@ -20,6 +20,11 @@
   </div>
 </article>
 <div id="sky-transition">
+  <article id="closed">
+    {% if not event.status %}
+    <h3>Registrations are closed.</h3>
+    {% endif %}
+  </article>
   {% if schedule_data %}
   <article id="schedule">
     <div class="content">
@@ -47,10 +52,6 @@
       </div>
       <div id="register-form">
         {% include 'regform.html' %}
-      </div>
-      {% else %}
-      <div class="closed">
-        <h3>Registrations are closed.</h3>
       </div>
       {% endif %}
     </div>
