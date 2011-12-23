@@ -40,3 +40,9 @@ GOOGLE_AD_CLIENT = ''
 GOOGLE_AD_SLOT = ''
 GOOGLE_AD_WIDTH = 0
 GOOGLE_AD_HEIGHT = 0
+#: LastUser server
+LASTUSER_SERVER = 'https://login.hasgeek.com/'
+#: LastUser client id
+LASTUSER_CLIENT_ID = ''
+#: LastUser client secret
+LASTUSER_CLIENT_SECRET = ''
