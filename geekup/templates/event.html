@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% from 'macros.html' import ajaxform, render_schedule %}
-{% block title %}GeekUp{% endblock %}
+{% block title %}{{ event.speakers[0].title }}: {{ event.title }}{% endblock %}
 {% block main %}
 <article id="about">
   <div class="content">
