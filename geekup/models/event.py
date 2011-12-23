@@ -28,6 +28,8 @@ class Event(db.Model, BaseMixin):
     date = db.Column(db.Date, nullable=False)
     #: Description for the event
     description = db.Column(db.Text, nullable=False)
+    #: Speaker name
+    speaker = db.Column(db.Unicode(255), nullable=False)
     #: Speaker Bio customized for the event
     speaker_bio = db.Column(db.Text, nullable=False)
     #: Schedule JSON for the event.
