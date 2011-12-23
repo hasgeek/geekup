@@ -8,3 +8,4 @@ test.db
 .settings
 .sass-cache
 geekup/static/img/uploads
+error.log

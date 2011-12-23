@@ -585,6 +585,13 @@ hr {
     margin-bottom: 1em;
 }
 
+#closed {
+    text-align: center;
+    font-size: 120%;
+    font-style: bold;
+    margin-bottom: 1em;
+}
+
 .exspace {
     padding-right: 0px;
     @include transition-property(padding-right);
