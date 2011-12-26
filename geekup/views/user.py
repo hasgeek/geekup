@@ -49,7 +49,7 @@ def eventpage(year, eventname, regform=None):
 
 
 @app.route('/<year>/<eventname>', methods=['POST'])
-def register(eventname):
+def register(year, eventname):
     form = RegisterForm()
     event = Event.query.filter_by(name=eventname, year=year).first()
     if form.validate_on_submit():
