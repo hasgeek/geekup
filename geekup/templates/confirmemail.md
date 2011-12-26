@@ -1,6 +1,6 @@
-Hello {{ participant.name }},
+Hello {{ participant.fullname }},
 
-This is a confirmation email for your registration for {{ participant.event.title }}.
+This is a confirmation email for your registration for "{{ participant.event.title }}" with {{ participant.event.speaker }}.
 
 [Click here to confirm your email address and registration][confirm]
 
