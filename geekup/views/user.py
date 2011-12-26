@@ -88,9 +88,13 @@ def confirm_email(pid, key, rsvpform=None):
     if participant is not None and participant.email_key == key:
         participant.email_status = True
         db.session.commit()
+        tweet = ("I'm attending the #geekup with %s at %s." %
+            (participant.event.speaker,
+            participant.event.venue.title))
         context = {
             'participant': participant,
             'rsvpform': rsvpform,
+            'tweet': tweet,
         }
         return render_template('confirm.html', **context)
     return redirect(url_for('index'))
