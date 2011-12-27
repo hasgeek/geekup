@@ -78,6 +78,7 @@
     });
     $('#{{ formid }} input[type="submit"]').click(function() {
       $('#{{ formid }}').find(".loading").removeClass('hidden');
+      $('#{{ formid }} input[type="submit"]').attr('disabled', 'disabled');
     });
   });
 </script>
