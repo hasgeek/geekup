@@ -3,7 +3,8 @@
 
 from geekup import app, mail
 from geekup.models import *
-from geekup.forms import RegisterForm, RsvpForm
+from geekup.forms import RegisterForm, RsvpForm, RSVP_STATUS
+from geekup.views.login import lastuser
 
 from flask import (
     render_template,
@@ -122,3 +123,17 @@ def rsvp(pid, key):
                 return confirm_email(pid, key, rsvpform=form)
     else:
         return redirect(url_for('index'))
+
+
+@app.route('/<year>/<eventname>/participants')
+@lastuser.requires_permission('siteadmin')
+def participant_list(year, eventname):
+    event = Event.query.filter_by(name=eventname, year=year).first_or_404()
+    participants = Participant.query.filter_by(event=event). \
+            order_by('rsvp').all()
+    context = {
+        'event': event,
+        'rsvp': RSVP_STATUS,
+        'participants': participants,
+    }
+    return render_template('participants.html', **context)

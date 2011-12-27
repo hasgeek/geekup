@@ -37,7 +37,7 @@ class Participant(db.Model, BaseMixin):
     #: Y = Yes, Attending
     #: M = Maybe Attending
     #: N = Not Attending
-    rsvp = db.Column(db.Integer, default=u'A', nullable=False)
+    rsvp = db.Column(db.Integer, default=0, nullable=False)
     #: Did the participant attend the event?
     attended = db.Column(db.Boolean, default=False, nullable=False)
     #: Datetime the participant showed up
