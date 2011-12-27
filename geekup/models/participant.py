@@ -33,10 +33,10 @@ class Participant(db.Model, BaseMixin):
     #: Has the user's application been approved?
     approved = db.Column(db.Boolean, default=False, nullable=False)
     #: RSVP status codes:
-    #: A = Awaiting Response
-    #: Y = Yes, Attending
-    #: M = Maybe Attending
-    #: N = Not Attending
+    #: 0 = Awaiting Response
+    #: 1 = Yes, Attending
+    #: 2 = Maybe Attending
+    #: 3 = Not Attending
     rsvp = db.Column(db.Integer, default=0, nullable=False)
     #: Did the participant attend the event?
     attended = db.Column(db.Boolean, default=False, nullable=False)

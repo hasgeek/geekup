@@ -7,6 +7,7 @@ from flaskext.wtf import (
     SelectField,
     Required,
     Email,
+    NoneOf,
     )
 
 
@@ -55,10 +56,10 @@ GALLERY_SECTIONS = [
 
 
 RSVP_STATUS = [
-    (u'awaiting', u'Awaiting Response'),
-    (u'yes', u'Yes, Attending'),
-    (u'maybe', u'Maybe Attending'),
-    (u'no', u'Not Attending'),
+    (u'0', u''),
+    (u'1', u'Yes, Attending'),
+    (u'2', u'Maybe Attending'),
+    (u'3', u'Not Attending'),
     ]
 
 
@@ -76,4 +77,6 @@ class RegisterForm(Form):
 
 
 class RsvpForm(Form):
-    rsvp = SelectField('Are you attending this event?', choices=RSVP_STATUS)
+    rsvp = SelectField('Are you attending this event?',
+                       choices=RSVP_STATUS,
+                       validators=[NoneOf(u'0', 'Please indicate your RSVP status')])
