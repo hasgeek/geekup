@@ -18,8 +18,7 @@ from flaskext.mail import Message
 
 import json
 from markdown import markdown
-from coaster import newsecret
-
+from uuid import uuid4
 
 @app.route('/')
 def index():
@@ -59,7 +58,7 @@ def register(year, eventname):
         participant.event_id = event.id
         participant.ipaddr = request.environ['REMOTE_ADDR']
         participant.useragent = request.user_agent.string
-        participant.email_key = newsecret()
+        participant.email_key = uuid4().hex
         db.session.add(participant)
         db.session.commit()
         if not participant.email_sent:
