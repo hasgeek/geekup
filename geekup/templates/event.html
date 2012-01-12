@@ -76,9 +76,11 @@
         <div id="map" style="height:250px"></div>
         <script>
           var map = new L.Map('map');
-          var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/0cb2761ce981414391f2941dd891892c/997/256/{z}/{x}/{y}.png',
-            cloudmadeAttrib = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
-              cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttrib});
+          var cloudmadeUrl = 'http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png',
+              subDomains = ['otile1','otile2','otile3','otile4'],
+              cloudmadeAttrib = 'Data, imagery and map information provided by <a href="http://open.mapquest.co.uk" target="_blank">MapQuest</a>, <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a>';
+              var cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttrib, subdomains: subDomains});
+
               var venue = new L.LatLng({{ event.venue.lat }}, {{ event.venue.lng }}); // geographical point (longitude and latitude)
               map.setView(venue, 15).addLayer(cloudmade);
 
