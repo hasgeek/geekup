@@ -68,8 +68,31 @@
     {% endif %}
 </div>
 <article id="venue">
-  <div class="content" id="hoarding">
-    <div id="venue-map"><!-- --></div>
+<div class="content" id="hoarding" style="450px">
+<div id="venue-map" style="height=450px">
+
+  <html>
+      <body>
+        <div id="map" style="height:250px"></div>
+        <script>
+          var map = new L.Map('map');
+          var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/0cb2761ce981414391f2941dd891892c/997/256/{z}/{x}/{y}.png',
+            cloudmadeAttrib = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
+              cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttrib});
+              var venue = new L.LatLng({{ event.venue.lat }}, {{ event.venue.lng }}); // geographical point (longitude and latitude)
+              map.setView(venue, 15).addLayer(cloudmade);
+
+                var venue_marker = new L.Marker(venue);
+                  map.addLayer(venue_marker);
+
+
+                  venue_marker.bindPopup('<strong>{{ event.venue.title }}</strong>').openPopup();
+                </script>
+              </body>
+            </html>  
+</div>
+
+
     <div id="venue-text">
       <h2>{{ event.venue.title }}</h2>
       {{ venue_address }}
@@ -84,29 +107,5 @@
 {% from "macros.html" import ajaxform -%}
 {{ ajaxform('regform', request, True) }}
 
-<!-- Map -->
-<script type="text/javascript">
-  var latlng = new google.maps.LatLng({{ event.venue.lat }}, {{ event.venue.lng }});
-  var mapOptions = {
-    zoom: 14,
-    center: latlng,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
-  var map = new google.maps.Map(document.getElementById("venue-map"), mapOptions);
-  var marker = new google.maps.Marker({
-    position: latlng,
-    map: map,
-    title: "{{event.venue.title}}"
-  });
-  var infowindow = new google.maps.InfoWindow({
-    content: '<strong>{{ event.venue.title }}</strong>'
-  });
-  google.maps.event.addListener(marker, 'click', function() {
-    infowindow.open(map, marker);
-  });
-  $(window).load(function() {
-    infowindow.open(map, marker);
-  });
-</script>
 
 {% endblock %}
