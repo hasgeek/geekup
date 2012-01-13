@@ -35,16 +35,14 @@
 	cursor: pointer;
 	}
 .leaflet-container img {
-	max-width: none !important;
+	max-width: auto;
 	}
 
 .leaflet-tile-pane { z-index: 2; }
-
-.leaflet-objects-pane { z-index: 3; }
-.leaflet-overlay-pane { z-index: 4; }
-.leaflet-shadow-pane { z-index: 5; }
-.leaflet-marker-pane { z-index: 6; }
-.leaflet-popup-pane { z-index: 7; }
+.leaflet-overlay-pane { z-index: 3; }
+.leaflet-shadow-pane { z-index: 4; }
+.leaflet-marker-pane { z-index: 5; }
+.leaflet-popup-pane { z-index: 6; }
 
 .leaflet-zoom-box {
 	width: 0;
@@ -253,7 +251,8 @@ a.leaflet-active {
 	text-align: left;
 	}
 .leaflet-popup-content {
-	margin: 19px;
+	margin: 12px 25px 12px 15px;
+	color: #666;
 	}
 .leaflet-popup-tip-container {
 	margin: 0 auto;
@@ -261,13 +260,14 @@ a.leaflet-active {
 	height: 16px;
 	position: relative;
 	overflow: hidden;
+	margin-top: -1px;
 	}
 .leaflet-popup-tip {
 	width: 15px;
 	height: 15px;
 	padding: 1px;
 
-	margin: -8px auto 0;
+	margin: -10px auto 0;
 
 	-moz-transform: rotate(45deg);
 	-webkit-transform: rotate(45deg);
@@ -308,16 +308,52 @@ a.leaflet-active {
 
 	box-shadow: 0 1px 10px #888;
 	-moz-box-shadow: 0 1px 10px #888;
-	 -webkit-box-shadow: 0 1px 14px #999;
+	-webkit-box-shadow: 0 1px 14px #999;
+	border: 1px solid rgba(100, 100, 100, 0.4);
 	}
 .leaflet-popup-content-wrapper {
-	-moz-border-radius: 20px;
-	-webkit-border-radius: 20px;
-	border-radius: 20px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
 	}
 .leaflet-popup-content {
 	font: 12px/1.4 "Helvetica Neue", Arial, Helvetica, sans-serif;
 	}
 .leaflet-popup-close-button {
 	background: white url(images/popup-close.png);
+	color: #555;
+	}
+
+@-moz-keyframes swing{
+	0%{-moz-transform:translate(0, 2px)}
+	100%{-moz-transform:translate(0, -2px)}
+}
+@-webkit-keyframes swing{
+	0%{-webkit-transform:translate(0, 2px)}
+	100%{-webkit-transform:translate(0, -2px)}
+}
+@keyframes swing{
+	0%{transform:translate(0, 2px)}
+	100%{transform:translate(0, -2px)}
+}
+.swinging{
+	-webkit-transform-origin: center top;
+
+	-webkit-animation-name: swing;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-direction: alternate;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: ease-in-out;
+
+	-moz-animation-name: swing;
+	-moz-animation-duration: 1s;
+	-moz-animation-direction: alternate;
+	-moz-animation-iteration-count: infinite;
+	-moz-animation-timing-function: ease-in-out;
+
+	animation-name: swing;
+	animation-duration: 1s;
+	animation-direction: alternate;
+	animation-iteration-count: infinite;
+	animation-timing-function: ease-in-out;
 	}

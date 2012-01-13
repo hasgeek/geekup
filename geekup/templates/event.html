@@ -86,9 +86,9 @@
 
                 var venue_marker = new L.Marker(venue);
                   map.addLayer(venue_marker);
-
-
                   venue_marker.bindPopup('<strong>{{ event.venue.title }}</strong>').openPopup();
+
+                  map.getPanes()["popupPane"].className = "swinging leaflet-popup-pane";
                 </script>
               </body>
             </html>  
