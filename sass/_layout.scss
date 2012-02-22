@@ -375,10 +375,12 @@ h1#site-title {
 
 #about-bio, #about-text {
     width: 525px;
-    text-align: justify;
     p, ol, ul {
         margin: 0 0 1em 0;
     }
+}
+#about-bio {
+   text-align: justify;
 }
 
 #picture-frame {
