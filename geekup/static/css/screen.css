@@ -1154,6 +1154,11 @@ h2, h3 {
   border-bottom-color: #ffffa2;
 }
 
+/* Fix for the maps on tablets */
+.leaflet-tile {
+  border: 1px solid transparent;
+}
+
 /* Form elements */
 div.field {
   *zoom: 1;

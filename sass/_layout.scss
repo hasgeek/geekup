@@ -817,3 +817,8 @@ footer {
     border: 10px solid transparent;
     border-bottom-color: $color-flash;
 }
+
+/* Fix for the maps on tablets */
+.leaflet-tile {
+    border: 1px solid transparent;
+}
