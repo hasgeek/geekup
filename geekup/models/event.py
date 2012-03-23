@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+    # -*- coding: utf-8 -*-
 
 from geekup.models import db, BaseMixin
 
@@ -11,6 +11,15 @@ event_speaker = db.Table('event_speaker',
 event_sponsor = db.Table('event_sponsor',
     db.Column('event_id', db.Integer, db.ForeignKey('event.id')),
     db.Column('sponsor_id', db.Integer, db.ForeignKey('sponsor.id')))
+
+class EventStatus:
+    DRAFT     = 0
+    ACTIVE      = 1
+    CLOSED    = 2
+    COMPLETED = 3
+    CANCELLED = 4
+    WITHDRAWN = 5
+    REJECTED  = 6
 
 
 class Event(db.Model, BaseMixin):
@@ -36,10 +45,9 @@ class Event(db.Model, BaseMixin):
     schedule_data = db.Column(db.Text, nullable=False)
     #: Photo of the speaker
     photo = db.Column(db.Unicode(255), nullable=True)
-    #: Statu of the event:
-    #: True = Open
-    #: False = Closed
-    status = db.Column(db.Boolean, default=True, nullable=False)
+    #: Status of the event:
+    #: Draft by default.
+    status = db.Column(db.Integer, nullable=False, default=EventStatus.DRAFT)
 
     #: Venue for the event, event.venue will give access to the
     #: event's venue object
