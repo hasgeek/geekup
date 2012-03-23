@@ -1,13 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-15 -*-
 
+from geekup.models import *
 from flaskext.wtf import (
     Form,
     TextField,
     SelectField,
+    QuerySelectField,
     Required,
     Email,
     NoneOf,
+    DateField,
+    TextAreaField,
     )
 
 
@@ -80,3 +84,26 @@ class RsvpForm(Form):
     rsvp = SelectField('Are you attending this event?',
                        choices=RSVP_STATUS,
                        validators=[NoneOf(u'0', 'Please indicate your RSVP status')])
+
+def get_speakers():
+    return Speaker.query.order_by('name').all()
+
+def get_users():
+    return User.query.order_by('fullname').all()
+
+def get_city():
+    return City.query.order_by('title').all()
+
+class NewForm(Form):
+
+    name = TextField('Name', validators=[Required('A name is required')])
+    title = TextField('Title', validators=[Required('A title is required')])
+    date = DateField('Date', validators=[Required('Propose a date')])
+    description = TextAreaField('Description', validators=[Required('Describe the Geekup')])
+    speaker = QuerySelectField("Speaker", query_factory=get_speakers, get_label='name', allow_blank=True,
+        description="Speaker for the Geekup")
+    speaker_bio = TextAreaField('Speaker Bio', validators=[Required('Short bio of the speaker')])
+    schedule = TextAreaField('Schedule')    
+    photo = TextField('Photo')
+    user = QuerySelectField('Select a user', query_factory= get_users, get_label='fullname')
+    city = QuerySelectField('Select a city', query_factory=get_city, get_label='title')

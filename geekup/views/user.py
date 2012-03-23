@@ -3,7 +3,7 @@
 
 from geekup import app, mail
 from geekup.models import *
-from geekup.forms import RegisterForm, RsvpForm, RSVP_STATUS
+from geekup.forms import RegisterForm, RsvpForm, RSVP_STATUS, NewForm
 from geekup.views.login import lastuser
 
 from flask import (
@@ -24,6 +24,14 @@ from uuid import uuid4
 def index():
     event = Event.query.order_by('date desc').first_or_404()
     return redirect(url_for('eventpage', year=event.year, eventname=event.name), 302)
+
+@app.route('/event/add')
+@lastuser.requires_login
+def event_add(newform=None):
+    if newform is None:
+        newform = NewForm()
+    context = {'newform':newform}
+    return render_template('new_event.html', **context)    
 
 
 @app.route('/<year>/<eventname>')

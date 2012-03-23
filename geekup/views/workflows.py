@@ -6,12 +6,12 @@ from geekup.views.login import lastuser
 
 
 class EventWorkflow(DocumentWorkflow):
-	"""
+
+    """
     Workflow for Geekup events.
     """
 
     state_attr = 'status'
-
     draft = WorkflowState(EventStatus.DRAFT, title=u"Draft")
     active = WorkflowState(EventStatus.ACTIVE, title=u"Active")
     closed = WorkflowState(EventStatus.CLOSED, title=u"Closed")
@@ -46,24 +46,24 @@ class EventWorkflow(DocumentWorkflow):
         """
         # Update timestamp
         self.document.datetime = datetime.utcnow()
-	
-	@draft.transition(cancelled, 'owner', title=u"Cancel", category="warning",
-		description=u"Cancel the Geekup, before opening.", view="event_cancel" )
-	def cancel(self):
-		"""
-		Cancel the Geekup
-		"""
-		pass
+    
+    @draft.transition(cancelled, 'owner', title=u"Cancel", category="warning",
+        description=u"Cancel the Geekup, before opening.", view="event_cancel" )
+    def cancel(self):
+        """
+        Cancel the Geekup
+        """
+        pass
 
-	@draft.transition(rejected, 'owner', title=u"Rejected", category="danger"
-		description=u"Reject the Geekup proposed by someone else", view="event_reject")
-	def reject(self):
-		"""
-		Reject the Geekup
-		"""
-		pass
+    @draft.transition(rejected, 'owner', title=u"Rejected", category="danger",
+        description=u"Reject the Geekup proposed by someone else", view="event_reject")
+    def reject(self):
+        """
+        Reject the Geekup
+        """
+        pass
 
-	@draft.transition(withdrawn, 'owner', title=u"Withdraw", category="danger"
+    @draft.transition(withdrawn, 'owner', title=u"Withdraw", category="danger",
         description=u"Withdraw the Geekup",view="event_withdraw")
     def withdraw(self):
         """
@@ -71,7 +71,7 @@ class EventWorkflow(DocumentWorkflow):
         """
         pass
 
-	@active.transition(closed, 'owner', title=u"Close", category="primary"
+    @active.transition(closed, 'owner', title=u"Close", category="primary",
         description=u"Close registrations for the Geekup",view="event_close")
     def close(self):
         """
@@ -80,7 +80,7 @@ class EventWorkflow(DocumentWorkflow):
         pass
 
 
-	@close.transition(completed, 'owner',title=u"Complete", category="success"
+    @closed.transition(completed, 'owner',title=u"Complete", category="success",
         description=u"Geekup completed",view="event_completed")
     def complete(self):
         """
@@ -88,4 +88,4 @@ class EventWorkflow(DocumentWorkflow):
         """
         pass
 
-Even.apply_on(Event)
+EventWorkflow.apply_on(Event)
