@@ -3,7 +3,7 @@
 
 from geekup import app, mail
 from geekup.models import *
-from geekup.forms import RegisterForm, RsvpForm, RSVP_STATUS, NewForm
+from geekup.forms import RegisterForm, RsvpForm, RSVP_STATUS, EventForm
 from geekup.views.login import lastuser
 
 from flask import (
@@ -27,28 +27,28 @@ def index():
 
 @app.route('/event/add', methods=['GET'])
 @lastuser.requires_login
-def event_add(newform=None):
+def event_add(eventform=None):
     if request.method=='GET':
-        if newform is None:
-            newform = NewForm()
-        context = {'newform':newform}
+        if eventform is None:
+            eventform = EventForm()
+        context = {'eventform':eventform}
         return render_template('new_event.html', **context)    
 
 @app.route('/event/add', methods=['POST'])
 def event_submit():
-    form = NewForm()
+    form = EventForm()
     if form.validate_on_submit():
         event = Event()
-        form.populate_obj(event) 
+        form.populate_obj(event)
         db.session.add(event)
         db.session.commit()
-        return render_template('newsuccess.html')
+        return render_template('eventsuccess.html')
     else:
         if request.is_xhr:
-            return render_template('newform.html', newform=form, ajax_re_register=True)
+            return render_template('eventform.html', eventform=form, ajax_re_register=True)
         else:
             flash("Please check your details and try again.", 'error')
-            return event_add(newform=form)
+            return event_add(eventform=form)
 
 
 

@@ -97,7 +97,9 @@ def get_city():
 def get_venue():
     return Venue.query.order_by('title').all()
 
-class NewForm(Form):
+
+
+class EventForm(Form):
 
     name = TextField('Name', validators=[Required('A name is required')])
     title = TextField('Title', validators=[Required('A title is required')])
@@ -108,6 +110,6 @@ class NewForm(Form):
     speaker_bio = TextAreaField('Speaker Bio', validators=[Required('Short bio of the speaker')])
     schedule_data = TextAreaField('Schedule')    
     photo = TextField('Photo')
-    user_id = QuerySelectField('Select a user', query_factory= get_users, get_label='fullname')
-    city_id = QuerySelectField('Select a city', query_factory=get_city, get_label='title')
-    venue_id = QuerySelectField('Select a venue', query_factory=get_venue, get_label='title')
+    user = QuerySelectField('Select a user', query_factory= get_users, get_label='fullname', allow_blank=True)
+    city = QuerySelectField('Select a city', query_factory=get_city, get_label='title', allow_blank=True)
+    venue = QuerySelectField('Select a venue', query_factory=get_venue, get_label='title', allow_blank=True)

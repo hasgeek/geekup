@@ -1,7 +1,10 @@
     # -*- coding: utf-8 -*-
 
 from geekup.models import db, BaseMixin
-
+from geekup.models.venue import Venue
+from geekup.models.city import City
+from geekup.models.user import User
+from geekup.models.speaker import Speaker
 from datetime import date
 
 event_speaker = db.Table('event_speaker',
@@ -38,7 +41,8 @@ class Event(db.Model, BaseMixin):
     #: Description for the event
     description = db.Column(db.Text, nullable=False)
     #: Speaker name
-    speaker = db.Column(db.Unicode(255), nullable=False)
+    speaker_id = db.Column(db.Integer, db.ForeignKey('speaker.id'))
+    speaker = db.relationship(Speaker, primaryjoin=speaker_id ==Speaker.id)
     #: Speaker Bio customized for the event
     speaker_bio = db.Column(db.Text, nullable=False)
     #: Schedule JSON for the event.
@@ -52,13 +56,16 @@ class Event(db.Model, BaseMixin):
     #: Venue for the event, event.venue will give access to the
     #: event's venue object
     venue_id = db.Column(db.Integer, db.ForeignKey('venue.id'))
+    venue = db.relationship(Venue, primaryjoin=venue_id == Venue.id)
     #: User creating the event, event.user will give access to
     #: the user's object
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship(User, primaryjoin=user_id == User.id)
     #: City for the event, event.city will give access to the
     #: city's object.
     city_id = db.Column(db.Integer, db.ForeignKey('city.id'))
-
+    city = db.relationship(City, primaryjoin=city_id == City.id)
+    
     #: List of speakers for the event, event.speakers gives access
     #: to the objects
     speakers = db.relationship('Speaker', secondary=event_speaker,
@@ -70,7 +77,7 @@ class Event(db.Model, BaseMixin):
     #: List of participants, event.participants gives access to
     #: the objects
     participants = db.relationship('Participant', backref='event',
-                                lazy='dynamic')
+                      lazy='dynamic')
 
     def __repr__(self):
         return self.title

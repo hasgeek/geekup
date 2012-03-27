@@ -11,8 +11,8 @@ class User(db.Model, UserBase):
 
     __tablename__ = 'user'
     #: Events that a user owns
-    events = db.relationship('Event', backref='user',
-                                lazy='dynamic')
+    # events = db.relationship('Event', backref='user',
+    #                             lazy='dynamic')
 
     def __repr__(self):
         return self.fullname

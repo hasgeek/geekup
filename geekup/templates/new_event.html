@@ -4,15 +4,15 @@
 {% block main %}
 <article id="event">
     <div class="content">
-      <div id="new-form">
-        {% include 'newform.html' %}
+      <div id="event-form">
+        {% include 'eventform.html' %}
       </div>
 {% endblock %}
 {% block footerscripts %}
 
 <!-- Ajax form -->
 {% from "macros.html" import ajaxform -%}
-{{ ajaxform('newform', request, True) }}
+{{ ajaxform('eventform', request, True) }}
 
 
 {% endblock %}

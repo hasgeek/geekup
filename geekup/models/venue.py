@@ -2,6 +2,8 @@
 
 from geekup.models import db, BaseMixin
 
+__all__ = ['Venue']
+
 
 class Venue(db.Model, BaseMixin):
     """
@@ -22,8 +24,8 @@ class Venue(db.Model, BaseMixin):
     lng = db.Column(db.Float(10))
 
     #: Events associated with the venue
-    events = db.relationship('Event', backref='venue',
-                                lazy='dynamic')
+    # events = db.relationship('Event', backref='venue',
+    #                             lazy='dynamic')
     #: City of the venue
     city_id = db.Column(db.Integer, db.ForeignKey('city.id'))
 
