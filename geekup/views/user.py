@@ -25,13 +25,31 @@ def index():
     event = Event.query.order_by('date desc').first_or_404()
     return redirect(url_for('eventpage', year=event.year, eventname=event.name), 302)
 
-@app.route('/event/add')
+@app.route('/event/add', methods=['GET'])
 @lastuser.requires_login
 def event_add(newform=None):
-    if newform is None:
-        newform = NewForm()
-    context = {'newform':newform}
-    return render_template('new_event.html', **context)    
+    if request.method=='GET':
+        if newform is None:
+            newform = NewForm()
+        context = {'newform':newform}
+        return render_template('new_event.html', **context)    
+
+@app.route('/event/add', methods=['POST'])
+def event_submit():
+    form = NewForm()
+    if form.validate_on_submit():
+        event = Event()
+        form.populate_obj(event) 
+        db.session.add(event)
+        db.session.commit()
+        return render_template('newsuccess.html')
+    else:
+        if request.is_xhr:
+            return render_template('newform.html', newform=form, ajax_re_register=True)
+        else:
+            flash("Please check your details and try again.", 'error')
+            return event_add(newform=form)
+
 
 
 @app.route('/<year>/<eventname>')

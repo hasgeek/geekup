@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% from 'macros.html' import ajaxform, render_schedule %}
+{% block title %}Add a new Geekup{% endblock %}
+{% block main %}
+<article id="event">
+    <div class="content">
+      <div id="new-form">
+        {% include 'newform.html' %}
+      </div>
+{% endblock %}
+{% block footerscripts %}
+
+<!-- Ajax form -->
+{% from "macros.html" import ajaxform -%}
+{{ ajaxform('newform', request, True) }}
+
+
+{% endblock %}
