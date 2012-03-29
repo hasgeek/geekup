@@ -3,6 +3,7 @@
 
 from geekup import app, mail
 from geekup.models import *
+from coaster.views import load_model
 from geekup.forms import RegisterForm, RsvpForm, RSVP_STATUS, EventForm
 from geekup.views.login import lastuser
 
@@ -34,7 +35,7 @@ def event_add(eventform=None):
         context = {'eventform':eventform}
         return render_template('new_event.html', **context)    
 
-@app.route('/event/add', methods=['POST'])
+@app.route('/event/new', methods=['POST'])
 def event_submit():
     form = EventForm()
     if form.validate_on_submit():
@@ -50,7 +51,29 @@ def event_submit():
             flash("Please check your details and try again.", 'error')
             return event_add(eventform=form)
 
+@app.route('/event/<int:id>/edit', methods=['GET', 'POST'])
+@lastuser.requires_login
+@load_model(Event, {'id': 'id'}, 'event')
+def event_edit(event):
+    if request.method=='GET':
+        workflow = event.workflow()
+        if not workflow.can_view():
+            abort(403)
+        if not workflow.can_edit():
+            return render_template('message.html',
+                message=u"You cannot edit this report at this time.")
+        form = EventForm(obj=event)
+        return event_add(eventform=form)
 
+    # All okay. Allow editing
+    if request.method=='POST':
+        form = EventForm(obj=event)
+        if form.validate_on_submit():
+            form.populate_obj(event)
+            db.session.commit()
+            flash("Edited event '%s'." % event.title, 'success')
+            return redirect(url_for('eventpage',year=event.year, eventname=event.name))
+    return event_add(eventform=form)
 
 @app.route('/<year>/<eventname>')
 def eventpage(year, eventname, regform=None):

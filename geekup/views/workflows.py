@@ -88,4 +88,22 @@ class EventWorkflow(DocumentWorkflow):
         """
         pass
 
+
+    def can_view(self):
+        """
+        Can the current user view this?
+        """
+        permissions = self.permissions()
+        if 'owner' in permissions:
+            return True
+        if 'reviewer' in permissions and self.reviewable():
+            return True
+        return False
+
+    def can_edit(self):
+        """
+        Can the current user edit this?
+        """
+        return 'owner' in self.permissions() and self.editable()        
+
 EventWorkflow.apply_on(Event)
