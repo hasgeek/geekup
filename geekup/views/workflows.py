@@ -22,6 +22,7 @@ class EventWorkflow(DocumentWorkflow):
 
      #: States in which an owner can edit
     editable = WorkflowStateGroup([draft, active], title=u"Editable")
+    public = WorkflowStateGroup([active,closed],title=u"Public")
     #: States in which a reviewer can view
     reviewable = WorkflowStateGroup([draft, active, closed, rejected, completed],
                                     title=u"Reviewable")
@@ -88,6 +89,14 @@ class EventWorkflow(DocumentWorkflow):
         """
         pass
 
+
+    def is_public(self):
+        """
+        Is the geekup public?
+        """
+        if self.public():
+            return True
+        return False
 
     def can_view(self):
         """

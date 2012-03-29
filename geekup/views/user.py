@@ -14,6 +14,7 @@ from flask import (
     url_for,
     flash,
     Markup,
+    abort,
     )
 from flaskext.mail import Message
 
@@ -23,11 +24,15 @@ from uuid import uuid4
 
 @app.route('/')
 def index():
-    event = Event.query.filter(Event.status=='1').order_by('date desc').first_or_404()
+    event = Event.query.filter(Event.status==1).order_by('date desc').first_or_404()
     return redirect(url_for('eventpage', year=event.year, eventname=event.name), 302)
 
 @app.route('/<year>/<eventname>')
 def eventpage(year, eventname, regform=None):
+    event = Event.query.filter_by(name=eventname, year=year).first_or_404()    
+    workflow = event.workflow()
+    if not workflow.is_public():
+        return redirect(url_for('event_edit',id=event.id))
     if regform is None:
         regform = RegisterForm()
     event = Event.query.filter_by(name=eventname, year=year).first_or_404()
@@ -44,9 +49,10 @@ def eventpage(year, eventname, regform=None):
             'event_description': Markup(event.description),
             'venue_description': Markup(event.venue.description),
             'venue_address': Markup(event.venue.address),
-            }
-    return render_template('event.html', **context)
+             }
 
+    return render_template('event.html', **context)
+    
 
 @app.route('/<year>/<eventname>', methods=['POST'])
 def register(year, eventname):
