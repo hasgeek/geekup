@@ -98,6 +98,9 @@ def get_city():
 def get_venue():
     return Venue.query.order_by('title').all()
 
+def get_sponsors():
+    return Sponsor.query.order_by('title').all()
+
 
 class EventForm(Form):
 
@@ -106,10 +109,11 @@ class EventForm(Form):
     date = DateField('Date', validators=[Required('Propose a date')])
     description = TextAreaField('Description', validators=[Required('Describe the Geekup')])
     speakers_list = TextField('Short name of speakers', validators=[Required('Please enter short names')])
-    speakers = QuerySelectMultipleField("Select one or more speakers for the geekup", query_factory=get_speakers, get_label="name")
+    speakers = QuerySelectMultipleField("Select one or more speakers for the geekup", query_factory=get_speakers, get_label="title")
     speaker_bio = TextAreaField('Speaker Bio', validators=[Required('Short bio of the speaker')])
     schedule_data = TextAreaField('Schedule')    
     photo = TextField('Photo')
+    sponsors = QuerySelectMultipleField("Select the sponsors", query_factory=get_sponsors, get_label="title")
     user = QuerySelectField('Select a user', query_factory= get_users, get_label='fullname', allow_blank=True)
     city = QuerySelectField('Select a city', query_factory=get_city, get_label='title', allow_blank=True)
     venue = QuerySelectField('Select a venue', query_factory=get_venue, get_label='title', allow_blank=True)
