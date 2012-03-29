@@ -41,6 +41,8 @@ class Event(db.Model, BaseMixin):
     #: Description for the event
     description = db.Column(db.Text, nullable=False)
     #: Speaker name
+    speakers_list = db.Column(db.Unicode(255), nullable=False)
+    #Avoid unicode field. Many-Many relation for speakers. 
     speaker_id = db.Column(db.Integer, db.ForeignKey('speaker.id'))
     speaker = db.relationship(Speaker, primaryjoin=speaker_id ==Speaker.id)
     #: Speaker Bio customized for the event

@@ -7,6 +7,7 @@ from flaskext.wtf import (
     TextField,
     SelectField,
     QuerySelectField,
+    QuerySelectMultipleField,
     Required,
     Email,
     NoneOf,
@@ -98,15 +99,14 @@ def get_venue():
     return Venue.query.order_by('title').all()
 
 
-
 class EventForm(Form):
 
     name = TextField('Name', validators=[Required('A name is required')])
     title = TextField('Title', validators=[Required('A title is required')])
     date = DateField('Date', validators=[Required('Propose a date')])
     description = TextAreaField('Description', validators=[Required('Describe the Geekup')])
-    speaker = QuerySelectField("Speaker", query_factory=get_speakers, get_label='name', allow_blank=True,
-        description="Speaker for the Geekup")
+    speakers_list = TextField('Short name of speakers', validators=[Required('Please enter short names')])
+    speakers = QuerySelectMultipleField("Select one or more speakers for the geekup", query_factory=get_speakers, get_label="name")
     speaker_bio = TextAreaField('Speaker Bio', validators=[Required('Short bio of the speaker')])
     schedule_data = TextAreaField('Schedule')    
     photo = TextField('Photo')

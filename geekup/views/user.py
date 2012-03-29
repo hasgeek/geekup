@@ -25,7 +25,7 @@ def index():
     event = Event.query.order_by('date desc').first_or_404()
     return redirect(url_for('eventpage', year=event.year, eventname=event.name), 302)
 
-@app.route('/event/add', methods=['GET'])
+@app.route('/event/new', methods=['GET'])
 @lastuser.requires_login
 def event_add(eventform=None):
     if request.method=='GET':

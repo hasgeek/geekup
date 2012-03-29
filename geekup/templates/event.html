@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 {% from 'macros.html' import ajaxform, render_schedule %}
-{% block title %}{{ event.speakers[0].title }}: {{ event.title }}{% endblock %}
+{% block title %}{{event.speakers|join(', ')}}: {{ event.title }}{% endblock %}
 {% block main %}
 <article id="about">
   <div class="content">
     <div id="about-banner">
-      <h2>{{ event.speaker }}</h2>
+      <h2>{{ event.speakers_list }}</h2>
     </div>
     <div id="picture-frame">
       <img src="{{ url_for('static', filename='img/%s' % (event.photo)) }}"/>
