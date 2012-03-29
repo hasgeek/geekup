@@ -17,7 +17,7 @@ event_sponsor = db.Table('event_sponsor',
 
 class EventStatus:
     DRAFT     = 0
-    ACTIVE      = 1
+    ACTIVE    = 1
     CLOSED    = 2
     COMPLETED = 3
     CANCELLED = 4
