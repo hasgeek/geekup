@@ -18,6 +18,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
+
 nav ul {
   list-style: none;
 }
@@ -1464,3 +1465,52 @@ span.loading.hidden {
     page-break-after: avoid;
   }
 }
+
+/* For tabs */
+    #tabs {
+    font-size: 80%;
+    }
+    #tabs ul {
+    float: left;
+    background: #E3FEFA;
+    width: 600px;
+    padding-top: 4px;
+    }
+    #tabs li {
+    margin-left: 8px;
+    list-style: none;
+    }
+    * html #tabs li {
+    display: inline; /* ie6 double float margin bug */
+    }
+    #tabs li,
+    #tabs li a {
+    float: left;
+    }
+    #tabs ul li a {
+    text-decoration: none;
+    padding: 8px;
+    color: #0073BF;
+    font-weight: bold;
+    }
+    #tabs ul li.active {
+    background: #CEE1EF url(img/nav-right.gif) no-repeat right top;
+    }
+    #tabs ul li.active a {
+    background: url(img/nav-left.gif) no-repeat left top;
+    color: #333333;
+    }
+    #tabs div {
+    background: #CEE1EF;
+    clear: both;
+    padding: 20px;
+    min-height: 200px;
+    }
+    #tabs div h3 {
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    }
+    #tabs div p {
+    line-height: 150%;
+    }

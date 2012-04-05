@@ -6,6 +6,7 @@ from geekup.models import *
 from coaster.views import load_model
 from geekup.forms import RegisterForm, RsvpForm, RSVP_STATUS, EventForm
 from geekup.views.login import lastuser
+from geekup.views.workflows import EventWorkflow
 
 from flask import (
     render_template,
@@ -13,6 +14,7 @@ from flask import (
     redirect,
     url_for,
     flash,
+    g,
     Markup,
     abort,
     )
@@ -22,10 +24,33 @@ import json
 from markdown import markdown
 from uuid import uuid4
 
+def available_events(user=None):
+    if user is None:
+        user = g.user
+    query = Event.query.order_by('date desc')
+    if 'reviewer' in lastuser.permissions():
+        # Get all events owned by this user and in states where the user can review them
+        query = Event.query.filter(db.or_(
+            Event.user == user,
+            Event.status.in_(EventWorkflow.reviewable.values)))
+    else:
+        query = Event.query.filter_by(user=user)
+    return query
+
 @app.route('/')
 def index():
     event = Event.query.filter(Event.status==1).order_by('date desc').first_or_404()
     return redirect(url_for('eventpage', year=event.year, eventname=event.name), 302)
+
+@app.route('/events')
+@lastuser.requires_login
+def events():
+    """
+    List all the events applicable to the current user
+    """
+
+    events = EventWorkflow.sort_documents(available_events().all())
+    return render_template('events.html', events=events, event_states=EventWorkflow.states(), eventspage=True)
 
 @app.route('/<year>/<eventname>')
 def eventpage(year, eventname, regform=None):

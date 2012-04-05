@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block title %}Geekup proposals{% endblock %}
+{% block content %}
+<div id="tabs">
+    <ul>
+        {% for s in event_states %}
+        <li><a href="#event-{{ s.name }}">{{ s.title }}</a></li>
+      {% endfor %}
+  </ul>
+      {% for s in event_states %}
+        <div id="event-{{ s.name }}">
+          <table class="table">
+            <thead>
+              <th>#</th>
+              <th>Date</th>
+              <th>Title</th>
+              <th>Speaker</th>
+              <th>Venue</th>
+              <th>City</th>
+            </thead>
+            <tbody>
+              {% for e in events[s.name] %}
+              <tr class="link">
+                  <td><a href="{{ url_for('eventpage', year=e.year, eventname=e.name) }}">#{{ e.id }}</a></td>
+                  <td><a href="{{ url_for('eventpage', year=e.year, eventname=e.name) }}">{{ e.date }}</a></td>
+                  <td><a href="{{ url_for('eventpage', year=e.year, eventname=e.name) }}">{{ e.title }}</a></td>
+                  <td><a href="{{ url_for('eventpage', year=e.year, eventname=e.name) }}">{{e.speakers|join(', ')}}</a></td>
+                  <td><a href="{{ url_for('eventpage', year=e.year, eventname=e.name) }}">{{ e.venue}}</a></td>                  
+                  <td><a href="{{ url_for('eventpage', year=e.year, eventname=e.name) }}">{{ e.city}}</a></td>
+                </tr>
+              {% else %}
+                <tr>
+                  <td><em>(No events found)</em></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% endfor %}
+</div>
+{% endblock %}
+
+{% block footerscripts %}
+    <script type="text/javascript">
+    $(document).ready(function(){
+    $('#tabs div').hide(); // Hide all divs
+    $('#tabs div:first').show(); // Show the first div
+    $('#tabs ul li:first').addClass('active'); // Set the class for active state
+    $('#tabs ul li a').click(function(){ // When link is clicked
+    $('#tabs ul li').removeClass('active'); // Remove active class from links
+    $(this).parent().addClass('active'); //Set parent of clicked link class to active
+    var currentTab = $(this).attr('href'); // Set currentTab to value of href attribute
+    $('#tabs div').hide(); // Hide all divs
+    $(currentTab).show(); // Show div with id equal to variable currentTab
+    return false;
+    });
+    });
+    </script>
+{% endblock %}
