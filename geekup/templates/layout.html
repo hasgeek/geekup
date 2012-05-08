@@ -1,3 +1,4 @@
+{% from "baseframe/components.html" import networkbar with context -%}
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
@@ -26,13 +27,15 @@
   <meta name="author" content="HasGeek"/>
 
   <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-  <link rel="apple-touch-icon" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+  {#<link rel="apple-touch-icon" href="{{ url_for('static', filename='apple-touch-icon.png') }}">#}
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/screen.css') }}?v=2"/>
+  {% assets "css_all" -%}
+    <link rel="stylesheet" href="{{ ASSET_URL }}"/>
+  {% endassets -%}
   <link rel="stylesheet" href="{{ url_for('static', filename='js/libs/leaflet/leaflet.css')}}" />
   <!--[if IE]>
-      <link href="css/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+      <link href="{{ url_for('static', filename='css/ie.css') }}" media="screen, projection" rel="stylesheet" type="text/css" />
   <![endif]-->
 
   <script type="text/javascript" src="{{ url_for('static', filename='js/libs/modernizr-1.6.min.js') }}"></script>
@@ -45,6 +48,7 @@
 <body>
   <div id="container" class="container">
     <header id="top">
+      {{ networkbar(siteid='geekup', login=false, containerclass='hg-bar-content') }}
       <div class="content">
         <p id="hasgeek">
           <a href="http://hasgeek.com/">HasGeek</a>

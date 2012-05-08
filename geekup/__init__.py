@@ -10,11 +10,13 @@ from flaskext.assets import Environment, Bundle
 from flaskext.mail import Mail
 from coaster import configureapp
 from os import environ
+from baseframe import baseframe, networkbar_js, networkbar_css
 
 # First, make an app and config it
 
 app = Flask(__name__, instance_relative_config=True)
 configureapp(app, 'GEEKUP_ENV')
+app.register_blueprint(baseframe)
 mail = Mail()
 mail.init_app(app)
 assets = Environment(app)
@@ -23,10 +25,16 @@ assets = Environment(app)
 
 js = Bundle('js/libs/jquery-1.6.4.js',
             'js/libs/jquery.form.js',
+            networkbar_js,
             'js/scripts.js',
             filters='jsmin', output='js/packed.js')
 
+css = Bundle(networkbar_css,
+             'css/screen.css',
+             filters='cssmin', output='css/packed.css')
+
 assets.register('js_all', js)
+assets.register('css_all', css)
 
 # Third, after config, import the models and views
 
