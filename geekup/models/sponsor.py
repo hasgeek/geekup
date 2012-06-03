@@ -3,7 +3,7 @@
 from geekup.models import db, BaseMixin
 
 
-class Sponsor(db.Model, BaseMixin):
+class Sponsor(BaseMixin, db.Model):
     """
     Sponsor data to display on event pages
     """

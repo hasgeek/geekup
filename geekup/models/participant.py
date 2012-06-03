@@ -4,7 +4,7 @@ from geekup.models import db, BaseMixin
 from datetime import datetime
 
 
-class Participant(db.Model, BaseMixin):
+class Participant(BaseMixin, db.Model):
     """
     Participant data, as submitted from the registration form.
     """

@@ -3,7 +3,7 @@
 from geekup.models import db, BaseMixin
 
 
-class Venue(db.Model, BaseMixin):
+class Venue(BaseMixin, db.Model):
     """
     Venue database since we'll want to reuse that.
     """

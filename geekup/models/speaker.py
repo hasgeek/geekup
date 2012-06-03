@@ -2,7 +2,7 @@
 from geekup.models import db, BaseMixin
 
 
-class Speaker(db.Model, BaseMixin):
+class Speaker(BaseMixin, db.Model):
     """
     Speaker data to display on event pages
     """

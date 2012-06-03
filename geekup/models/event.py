@@ -13,7 +13,7 @@ event_sponsor = db.Table('event_sponsor',
     db.Column('sponsor_id', db.Integer, db.ForeignKey('sponsor.id')))
 
 
-class Event(db.Model, BaseMixin):
+class Event(BaseMixin, db.Model):
     """
     Events - the core of geekup
     """
