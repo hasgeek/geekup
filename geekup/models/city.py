@@ -3,7 +3,7 @@
 from geekup.models import db, BaseNameMixin
 
 
-class City(db.Model, BaseNameMixin):
+class City(BaseNameMixin, db.Model):
     """
     A city, mostly for feeds and subscription
     """
