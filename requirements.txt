@@ -8,6 +8,7 @@ markdown
 pygooglechart
 https://github.com/hasgeek/coaster/zipball/master
 https://github.com/hasgeek/flask-lastuser/zipball/master
+https://github.com/hasgeek/baseframe/zipball/master
 jsmin
 greatape
 Flask-Admin

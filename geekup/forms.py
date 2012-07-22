@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-15 -*-
 
-from flaskext.wtf import (
+from flask.ext.wtf import (
     Form,
     TextField,
     SelectField,
