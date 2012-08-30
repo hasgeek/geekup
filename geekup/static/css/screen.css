@@ -677,6 +677,9 @@ h1#site-title {
 #about-bio {
   text-align: justify;
 }
+#about-bio h1, #about-bio h2, #about-bio h3, #about-bio h4, #about-bio h5, #about-bio h6 {
+  text-align: left;
+}
 
 #picture-frame {
   background-image: url('../img/frame.png?1328610290');
