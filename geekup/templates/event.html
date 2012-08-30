@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 {% from 'macros.html' import ajaxform, render_schedule %}
-{% block title %}{{ event.speakers[0].title }}: {{ event.title }}{% endblock %}
+{% block title %}{{ event.title }}{% endblock %}
 {% block main %}
 <article id="about">
   <div class="content">
-    <div id="about-banner">
+    <div class="about-banner">
       <h2>{{ event.speaker }}</h2>
     </div>
     <div id="picture-frame">
@@ -13,10 +13,12 @@
     <div id="about-bio">
       {{ speaker_bio }}
     </div>
+    {% if event_description %}
     <div id="about-text">
       <h2>{{ event.title}}</h2>
       {{ event_description }}
     </div>
+    {% endif %}
   </div>
 </article>
 <div id="sky-transition">
@@ -91,7 +93,7 @@
                   map.getPanes()["popupPane"].className = "swinging leaflet-popup-pane";
                 </script>
               </body>
-            </html>  
+            </html>
 </div>
 
 
@@ -103,7 +105,7 @@
 
     </div>
   </div>
-</article>        
+</article>
 {% endblock %}
 {% block footerscripts %}
 

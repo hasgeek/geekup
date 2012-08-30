@@ -312,7 +312,7 @@ a:hover, a:active {
 
 header {
   background-color: #bceef7;
-  background-image: url('../img/gradient1.svg?1324527959');
+  background-image: url('../img/gradient1.svg?1328610290');
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #bceef7), color-stop(100%, #5abcec));
   background-image: -webkit-linear-gradient(#bceef7, #5abcec);
   background-image: -moz-linear-gradient(#bceef7, #5abcec);
@@ -342,7 +342,7 @@ td {
   text-indent: -119988px;
   overflow: hidden;
   text-align: left;
-  background-image: url('../img/planesprite.png?1324527960');
+  background-image: url('../img/planesprite.png?1328610290');
   background-repeat: no-repeat;
   background-position: 50% 50%;
   position: absolute;
@@ -413,7 +413,7 @@ td {
   text-indent: -119988px;
   overflow: hidden;
   text-align: left;
-  background-image: url('../img/cloudsprite.png?1324527959');
+  background-image: url('../img/cloudsprite.png?1328610290');
   background-repeat: no-repeat;
   background-position: 50% 50%;
   position: absolute;
@@ -539,7 +539,7 @@ h1#site-title {
   text-indent: -119988px;
   overflow: hidden;
   text-align: left;
-  background-image: url('../img/hasgeek-presents.png?1324527959');
+  background-image: url('../img/hasgeek-presents.png?1328610290');
   background-repeat: no-repeat;
   background-position: 50% 50%;
   width: 100px;
@@ -608,7 +608,7 @@ h1#site-title {
   color: black;
 }
 
-#about-banner {
+.about-banner {
   background: #FFF;
   padding: 0;
   color: #222;
@@ -618,7 +618,7 @@ h1#site-title {
   width: 525px;
   margin-bottom: 3.33em;
 }
-#about-banner:before {
+.about-banner:before {
   border: 30px solid #5f5f5f;
   border-left-color: transparent;
   width: 0;
@@ -629,7 +629,7 @@ h1#site-title {
   z-index: -2;
   content: "";
 }
-#about-banner:after {
+.about-banner:after {
   border: 30px solid #5f5f5f;
   border-right-color: transparent;
   display: block;
@@ -639,7 +639,7 @@ h1#site-title {
   z-index: -2;
   content: "";
 }
-#about-banner h2 {
+.about-banner h2 {
   position: relative;
   margin: 0;
   padding: 10px 0 0 0;
@@ -648,7 +648,7 @@ h1#site-title {
   vertical-align: middle;
   height: 55px;
 }
-#about-banner h2:before, #about-banner h2:after {
+.about-banner h2:before, .about-banner h2:after {
   border-width: 10px 15px;
   border-style: solid;
   width: 0;
@@ -658,11 +658,11 @@ h1#site-title {
   content: "";
   bottom: -5px;
 }
-#about-banner h2:before {
+.about-banner h2:before {
   border-color: transparent black transparent transparent;
   left: -15px;
 }
-#about-banner h2:after {
+.about-banner h2:after {
   border-color: transparent transparent transparent black;
   right: -15px;
 }
@@ -679,7 +679,7 @@ h1#site-title {
 }
 
 #picture-frame {
-  background-image: url('../img/frame.png?1324527959');
+  background-image: url('../img/frame.png?1328610290');
   background-position: 50% 0;
   background-repeat: no-repeat;
   padding-top: 233px;
@@ -730,7 +730,7 @@ hr {
 
 #sky-transition {
   background-color: #bceef7;
-  background-image: url('../img/gradient2.svg?1324527959');
+  background-image: url('../img/gradient2.svg?1328610290');
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5abcec), color-stop(100%, #bceef7));
   background-image: -webkit-linear-gradient(#5abcec, #bceef7);
   background-image: -moz-linear-gradient(#5abcec, #bceef7);
@@ -873,7 +873,7 @@ hr {
   text-indent: -119988px;
   overflow: hidden;
   text-align: left;
-  background-image: url('../img/meghaman.png?1324527959');
+  background-image: url('../img/meghaman.png?1328610290');
   background-repeat: no-repeat;
   background-position: 50% 50%;
   width: 300px;
@@ -956,7 +956,7 @@ article:hover .exspace {
 }
 
 #hoarding {
-  background-image: url('../img/hoarding.png?1324527959');
+  background-image: url('../img/hoarding.png?1328610290');
   background-repeat: no-repeat;
   background-position: 0 0;
   min-height: 500px;
@@ -1005,7 +1005,7 @@ h2, h3 {
 }
 
 #ground {
-  background-image: url('../img/ground.png?1324527959');
+  background-image: url('../img/ground.png?1328610290');
   background-repeat: no-repeat;
   background-position: 50% 50%;
   height: 132px;
@@ -1407,7 +1407,7 @@ input[type="submit"].delete:hover {
 
 span.loading {
   display: inline-block;
-  background: url('../img/ajax-loader.gif?1324527959') center no-repeat;
+  background: url('../img/ajax-loader.gif?1328610290') center no-repeat;
   width: 16px;
   height: 16px;
 }

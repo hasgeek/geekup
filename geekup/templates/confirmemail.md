@@ -1,6 +1,6 @@
 Hello {{ participant.fullname }},
 
-This is a confirmation email for your registration for "{{ participant.event.title }}" with {{ participant.event.speaker }}.
+This is a confirmation email for your registration for "{{ participant.event.title }}".
 
 [Click here to confirm your email address and registration][confirm]
 
@@ -14,5 +14,5 @@ info@hasgeek.in if you have suggestions or questions on this service.
 
 If you did not register, you may safely ignore this email and your registration will be automatically removed.
 
-Regards  
+Regards
 The non-sentient HasGeek email robot
