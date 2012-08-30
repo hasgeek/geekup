@@ -674,7 +674,7 @@ h1#site-title {
   margin: 0 0 1em 0;
 }
 
-#about-bio {
+#about-bio p {
   text-align: justify;
 }
 

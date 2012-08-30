@@ -389,7 +389,9 @@ h1#site-title {
     }
 }
 #about-bio {
-   text-align: justify;
+   p {
+       text-align: justify;
+   }
 }
 
 #picture-frame {
