@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 
+from datetime import date
 from geekup import app, mail
 from geekup.models import *
 from geekup.forms import RegisterForm, RsvpForm, RSVP_STATUS
@@ -20,9 +21,10 @@ import json
 from markdown import markdown
 from uuid import uuid4
 
+
 @app.route('/')
 def index():
-    event = Event.query.order_by('date desc').first_or_404()
+    event = Event.query.filter(Event.date >= date.today()).order_by('date').first_or_404()
     return redirect(url_for('eventpage', year=event.year, eventname=event.name), 302)
 
 

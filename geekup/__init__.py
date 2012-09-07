@@ -6,8 +6,8 @@ Website server for geekup.in
 """
 
 from flask import Flask
-from flaskext.assets import Environment, Bundle
-from flaskext.mail import Mail
+from flask.ext.assets import Environment, Bundle
+from flask.ext.mail import Mail
 from coaster import configureapp
 from os import environ
 from baseframe import baseframe, networkbar_js, networkbar_css
