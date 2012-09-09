@@ -24,7 +24,10 @@ from uuid import uuid4
 
 @app.route('/')
 def index():
-    event = Event.query.filter(Event.date >= date.today()).order_by('date').first_or_404()
+    event = Event.query.filter(Event.date >= date.today()).order_by('date').limit(1).first()
+    if event is None:
+        # No upcoming events. Find most recent past event
+        event = Event.query.order_by('date desc').limit(1).first_or_404()
     return redirect(url_for('eventpage', year=event.year, eventname=event.name), 302)
 
 
