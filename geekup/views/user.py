@@ -15,7 +15,7 @@ from flask import (
     flash,
     Markup,
     )
-from flaskext.mail import Message
+from flask.ext.mail import Message
 
 import json
 from markdown import markdown
