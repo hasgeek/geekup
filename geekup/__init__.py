@@ -45,12 +45,29 @@ if environ.get('GEEKUP_ENV') == 'prod':
 
 # Fourth, setup admin for the models
 
-from flask.ext import admin
-from flask.ext.admin.datastore.sqlalchemy import SQLAlchemyDatastore
+from flask.ext.admin import Admin
+from geekup.models import (
+    db,
+    Event,
+    Participant,
+    Speaker,
+    Sponsor,
+    User,
+    Venue,
+    City,
+)
+from flask.ext.admin.contrib.sqlamodel import ModelView
 from geekup.views.login import lastuser
 
-admin_datastore = SQLAlchemyDatastore(geekup.models, geekup.models.db.session)
-admin_blueprint = admin.create_admin_blueprint(admin_datastore,
-    view_decorator=lastuser.requires_permission('siteadmin'))
+class AuthModelView(ModelView):
+    def is_accessible(self):
+        return True #lastuser.has_permission('siteadmin')
 
-app.register_blueprint(admin_blueprint, url_prefix='/admin')
+admin = Admin(app, name='Geekup')
+admin.add_view(AuthModelView(City, db.session))
+admin.add_view(AuthModelView(Event, db.session))
+admin.add_view(AuthModelView(Participant, db.session))
+admin.add_view(AuthModelView(Speaker, db.session))
+admin.add_view(AuthModelView(Sponsor, db.session))
+admin.add_view(AuthModelView(User, db.session))
+admin.add_view(AuthModelView(Venue, db.session))
