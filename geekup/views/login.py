@@ -7,6 +7,7 @@ from coaster.views import get_next_url
 
 from geekup import app
 from geekup.models import db, User
+from geekup.views.errors import not_authorized
 
 lastuser = LastUser(app)
 lastuser.init_usermanager(UserManager(db, User))
