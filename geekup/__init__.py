@@ -61,7 +61,7 @@ from geekup.views.login import lastuser
 
 class AuthModelView(ModelView):
     def is_accessible(self):
-        return True #lastuser.has_permission('siteadmin')
+        return lastuser.has_permission('siteadmin')
 
 admin = Admin(app, name='Geekup')
 admin.add_view(AuthModelView(City, db.session))
