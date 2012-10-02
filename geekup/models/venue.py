@@ -17,9 +17,9 @@ class Venue(BaseMixin, db.Model):
     #: Address of the venue
     address = db.Column(db.Text, nullable=True)
     #: Latitude of the venue
-    lat = db.Column(db.Float(10))
+    lat = db.Column(db.Numeric(7, 4))
     #: Longitude of the venue
-    lng = db.Column(db.Float(10))
+    lng = db.Column(db.Numeric(7, 4))
 
     #: Events associated with the venue
     events = db.relationship('Event', backref='venue',
