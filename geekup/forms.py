@@ -23,7 +23,7 @@ USER_CATEGORIES = [
 
 
 REFERRERS = [
-    ('', u''),
+    ('0', u''),
     ('1', u'Twitter'),
     ('2', u'Facebook'),
     ('3', u'LinkedIn'),
