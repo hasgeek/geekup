@@ -8,6 +8,7 @@ from geekup.forms import RegisterForm, RsvpForm, RSVP_STATUS
 from geekup.views.login import lastuser
 
 from flask import (
+    abort,
     render_template,
     request,
     redirect,
@@ -35,6 +36,10 @@ def index():
 def eventpage(year, eventname, regform=None):
     if regform is None:
         regform = RegisterForm()
+    try:
+        year = int(year)
+    except ValueError:
+        abort(404)
     event = Event.query.filter_by(name=eventname, year=year).first_or_404()
     try:
         schedule_data = json.loads(event.schedule_data)
