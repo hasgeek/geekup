@@ -812,12 +812,12 @@ footer {
     content: "";
     display: block; /* reduce the damage in FF3.0 */
     position: absolute;
-    top: -21px; /* value = - border-top-width - border-bottom-width */
-    left: 5em; /* controls horizontal position */
+    top: 1em; /* value = - border-top-width - border-bottom-width */
+    left: -21px; /* controls horizontal position */
     width: 0;
     height: 0;
     border: 10px solid transparent;
-    border-bottom-color: $color-sheet-border;
+    border-right-color: $color-sheet-border;
 }
 
 /* creates the smaller  triangle */
@@ -825,12 +825,12 @@ footer {
     content: "";
     display: block; /* reduce the damage in FF3.0 */
     position: absolute;
-    top: -20px; /* value = - border-top-width - border-bottom-width */
-    left: 5em; /* value = (:before left) + (:before border-left) - (:after border-left) */
+    top: 1em; /* value = - border-top-width - border-bottom-width */
+    left: -20px; /* value = (:before left) + (:before border-left) - (:after border-left) */
     width: 0;
     height: 0;
     border: 10px solid transparent;
-    border-bottom-color: $color-flash;
+    border-right-color: $color-flash;
 }
 
 /* Fix for the maps on tablets */

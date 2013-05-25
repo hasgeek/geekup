@@ -1129,14 +1129,14 @@ h2, h3 {
   display: block;
   /* reduce the damage in FF3.0 */
   position: absolute;
-  top: -21px;
+  top: 1em;
   /* value = - border-top-width - border-bottom-width */
-  left: 5em;
+  left: -21px;
   /* controls horizontal position */
   width: 0;
   height: 0;
   border: 10px solid transparent;
-  border-bottom-color: #afafaf;
+  border-right-color: #afafaf;
 }
 
 /* creates the smaller  triangle */
@@ -1145,14 +1145,14 @@ h2, h3 {
   display: block;
   /* reduce the damage in FF3.0 */
   position: absolute;
-  top: -20px;
+  top: 1em;
   /* value = - border-top-width - border-bottom-width */
-  left: 5em;
+  left: -20px;
   /* value = (:before left) + (:before border-left) - (:after border-left) */
   width: 0;
   height: 0;
   border: 10px solid transparent;
-  border-bottom-color: #ffffa2;
+  border-right-color: #ffffa2;
 }
 
 /* Fix for the maps on tablets */
