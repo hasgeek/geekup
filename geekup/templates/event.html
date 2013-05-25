@@ -101,6 +101,7 @@
 
     var venue = new L.LatLng({{ event.venue.lat }}, {{ event.venue.lng }}); // geographical point (longitude and latitude)
     map.setView(venue, 15).addLayer(cloudmade);
+    map.scrollWheelZoom.disable();
 
     var venue_marker = new L.Marker(venue);
     map.addLayer(venue_marker);
