@@ -396,15 +396,18 @@ h1#site-title {
 }
 
 #picture-frame {
-    background-image: image-url('frame.png');
-    background-position: 50% 0;
-    background-repeat: no-repeat;
-    padding-top: 233px;
+    // background-image: image-url('frame.png');
+    // background-position: 50% 0;
+    // background-repeat: no-repeat;
+    // padding-top: 233px;
     text-align: center;
     width: 372px;
     position: absolute;
     right: 15px;
-    top: -70px;
+    top: 127px;
+}
+
+#about {
     img {
         border: 1px solid #8235af;
         padding: 5px;
