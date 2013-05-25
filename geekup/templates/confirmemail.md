@@ -7,7 +7,7 @@ This is a confirmation email for your registration for "{{ participant.event.tit
 [confirm]: {{ url_for('confirm_email', _external=True, pid=participant.id, key=participant.email_key) }}
 
 [Geekup][gu] is a service of [HasGeek][hg]. Write to us at
-info@hasgeek.in if you have suggestions or questions on this service.
+info@hasgeek.com if you have suggestions or questions on this service.
 
 [gu]: http://geekup.in
 [hg]: http://hasgeek.com
