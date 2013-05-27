@@ -87,7 +87,7 @@ def register(year, eventname):
                                    regform=form, ajax_re_register=True)
         else:
             flash("Please check your details and try again.", 'error')
-            return eventpage(eventname, regform=form)
+            return eventpage(year, eventname, regform=form)
 
 
 @app.route('/confirm/<pid>/<key>')
