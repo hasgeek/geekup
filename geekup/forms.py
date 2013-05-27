@@ -33,6 +33,7 @@ REFERRERS = [
     ('6', u'Blog'),
     ('7', u'Email/IM from Friend'),
     ('8', u'Colleague at Work'),
+    ('11', u'IRC'),
     ('9', u'Other'),
     ]
 
