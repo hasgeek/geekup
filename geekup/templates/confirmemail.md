@@ -9,8 +9,8 @@ This is a confirmation email for your registration for "{{ participant.event.tit
 [Geekup][gu] is a service of [HasGeek][hg]. Write to us at
 info@hasgeek.com if you have suggestions or questions on this service.
 
-[gu]: http://geekup.in
-[hg]: http://hasgeek.com
+[gu]: https://geekup.in
+[hg]: https://hasgeek.com
 
 If you did not register, you may safely ignore this email and your registration will be automatically removed.
 

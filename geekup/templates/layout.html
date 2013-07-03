@@ -9,7 +9,7 @@
   <!--
   
   Does this website look familiar? That's because it was adapted from
-  two earlier websites: Scaling PHP in the Cloud (http://phpcloud.hasgeek.com)
+  two earlier websites: Scaling PHP in the Cloud (https://phpcloud.hasgeek.com)
   and DocType HTML5 (http://www.doctypehtml5.in).
 
   Good code and graphics shouldn't go to waste.
@@ -39,7 +39,7 @@
 
   <script type="text/javascript" src="{{ url_for('static', filename='js/libs/modernizr-1.6.min.js') }}"></script>
 {%- if config['TYPEKIT_CODE'] %}
-  <script type="text/javascript" src="http://use.typekit.com/{{ config['TYPEKIT_CODE'] }}.js"></script>
+  <script type="text/javascript" src="//use.typekit.com/{{ config['TYPEKIT_CODE'] }}.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 {% endif -%}
 {% block pageheaders %}{% endblock %}
@@ -114,7 +114,7 @@
   {% endassets -%}
   <script type="text/javascript" src="{{url_for('static',filename='js/libs/leaflet/leaflet.js')}}"></script>
 
-  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+  <script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false"></script>
 
   <!--[if lt IE 7 ]>
     <script src="{{ url_for('static', filename='js/libs/dd_belatedpng.js') }}"></script>
