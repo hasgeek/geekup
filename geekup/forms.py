@@ -1,14 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-15 -*-
 
-from flask.ext.wtf import (
-    Form,
-    TextField,
-    SelectField,
-    Required,
-    Email,
-    NoneOf,
-    )
+from baseframe.forms import Form
+from wtforms import TextField, SelectField
+from wtforms.validators import Required, Email, NoneOf
 
 
 USER_CATEGORIES = [
