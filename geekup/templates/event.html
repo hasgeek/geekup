@@ -8,7 +8,7 @@
       <h2>{{ event.speaker }}</h2>
     </div>
     <div id="picture-frame">
-      <img src="{{ url_for('static', filename='img/%s' % (event.photo)) }}"/>
+      <img src="{{ event.photo }}"/>
     </div>
     <div id="about-bio">
       {{ speaker_bio }}
@@ -62,7 +62,7 @@
     <div class="content">
       <h3>Supported by</h3>
       {% for sponsor in event.sponsors %}
-      <a href="{{ sponsor.url }}" title="{{ sponsor.title }}"><img src="{{ url_for('static', filename='img/%s' % sponsor.photo) }}" alt="{{ sponsor.title }}"/></a>
+      <a href="{{ sponsor.url }}" title="{{ sponsor.title }}"><img src="{{ sponsor.photo }}" alt="{{ sponsor.title }}"/></a>
       {% endfor %}
     </div>
     </article>
