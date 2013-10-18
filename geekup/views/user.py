@@ -66,8 +66,8 @@ def register(year, eventname):
         participant = Participant()
         form.populate_obj(participant)
         participant.event_id = event.id
-        participant.ipaddr = request.environ['REMOTE_ADDR']
-        participant.useragent = request.user_agent.string
+        participant.ipaddr = request.environ['REMOTE_ADDR'][:45]
+        participant.useragent = request.user_agent.string[:250]
         participant.email_key = uuid4().hex
         db.session.add(participant)
         db.session.commit()

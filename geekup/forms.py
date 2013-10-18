@@ -3,7 +3,7 @@
 
 from baseframe.forms import Form
 from wtforms import TextField, SelectField
-from wtforms.validators import Required, Email, NoneOf
+from wtforms.validators import Required, Email, NoneOf, Length
 
 
 USER_CATEGORIES = [
@@ -61,13 +61,13 @@ RSVP_STATUS = [
 
 class RegisterForm(Form):
     fullname = TextField('Full name',
-                         validators=[Required("Your name is required")])
+                         validators=[Required("Your name is required"), Length(max=80)])
     email = TextField('Email address',
                       validators=[Required("Your email address is required"),
-                      Email()])
-    company = TextField('Company name')
-    jobtitle = TextField('Job title')
-    twitter = TextField('Twitter id')
+                        Email(), Length(max=80)])
+    company = TextField('Company name', validators=[Length(max=80)])
+    jobtitle = TextField('Job title', validators=[Length(max=80)])
+    twitter = TextField('Twitter id', validators=[Length(max=80)])
     referrer = SelectField('How did you hear about this event?',
                            choices=REFERRERS)
 
