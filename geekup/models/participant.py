@@ -29,7 +29,7 @@ class Participant(BaseMixin, db.Model):
     regdate = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     #: Submitter's IP address, for logging
     #: (45 chars to accommodate an IPv6 address)
-    ipaddr = db.Column(db.Text(45), nullable=False)
+    ipaddr = db.Column(db.String(45), nullable=False)
     #: Has the user's application been approved?
     approved = db.Column(db.Boolean, default=False, nullable=False)
     #: RSVP status codes:
