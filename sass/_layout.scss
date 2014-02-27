@@ -80,6 +80,7 @@ td {
     position: relative;
     padding-top: 90px;
     padding-bottom: 30px;
+    height: 150px;
 }
 
 .plane {
@@ -94,14 +95,15 @@ td {
     position: relative;
     margin: 0 auto;
     left: -100px;
+    top: -85px;
 }
 
 #plane-right {
   background-position: -600px -400px;
   width: 272px;
   height: 93px;
-  top: -35px;
-  left: 730px;
+  top: -40px;
+  left: 790px;
 }
 
 #plane-off-left {
@@ -124,14 +126,14 @@ td {
   background-position: -550px -200px;
   width: 427px;
   height: 147px;
-  left: 290px;
-  top: -25px;
+  left: 370px;
+  top: -50px;
 }
 
 #plane-banner-text {
     position: absolute;
     left: 690px;
-    top: 150px;
+    top: 65px;
     color: #444;
     line-height: 1.8;
     @include rotate(-2deg);
@@ -180,7 +182,7 @@ td {
 }
 
 #cloud-large-3 {
-  top: -90px;
+  top: -165px;
   left: -350px;
   height: 440px;
   background-position: 0 -500px;
@@ -243,7 +245,7 @@ td {
 h1#site-title {
     position: absolute;
     left: 470px;
-    top: 130px;
+    top: 45px;
     color: #444;
     font-size: 333%;
     font-weight: bold;
