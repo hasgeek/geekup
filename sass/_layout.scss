@@ -809,31 +809,6 @@ footer {
     @include single-box-shadow(rgba(0, 0, 0, 0.1), 0, 1px, 2px);
 }
 
-.flash:before, #guide:before {
-    content: "";
-    display: block; /* reduce the damage in FF3.0 */
-    position: absolute;
-    top: 1em; /* value = - border-top-width - border-bottom-width */
-    left: -21px; /* controls horizontal position */
-    width: 0;
-    height: 0;
-    border: 10px solid transparent;
-    border-right-color: $color-sheet-border;
-}
-
-/* creates the smaller  triangle */
-.flash:after, #guide:after {
-    content: "";
-    display: block; /* reduce the damage in FF3.0 */
-    position: absolute;
-    top: 1em; /* value = - border-top-width - border-bottom-width */
-    left: -20px; /* value = (:before left) + (:before border-left) - (:after border-left) */
-    width: 0;
-    height: 0;
-    border: 10px solid transparent;
-    border-right-color: $color-flash;
-}
-
 /* Fix for the maps on tablets */
 .leaflet-tile {
     border: 1px solid transparent;
