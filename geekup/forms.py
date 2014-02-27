@@ -18,18 +18,19 @@ USER_CATEGORIES = [
 
 
 REFERRERS = [
-    ('0', u''),
-    ('1', u'Twitter'),
-    ('2', u'Facebook'),
-    ('3', u'LinkedIn'),
-    ('5', u'Google Plus'),
-    ('4', u'Google/Bing Search'),
+    ('0',  u''),
+    ('12', u'HasGeek Email'),
+    ('1',  u'Twitter'),
+    ('2',  u'Facebook'),
+    ('3',  u'LinkedIn'),
+    ('5',  u'Google Plus'),
+    ('4',  u'Google/Bing Search'),
     ('10', u'Discussion Group or List'),
-    ('6', u'Blog'),
-    ('7', u'Email/IM from Friend'),
-    ('8', u'Colleague at Work'),
+    ('6',  u'Blog'),
+    ('7',  u'Email/IM from Friend'),
+    ('8',  u'Colleague at Work'),
     ('11', u'IRC'),
-    ('9', u'Other'),
+    ('9',  u'Other'),
     ]
 
 
