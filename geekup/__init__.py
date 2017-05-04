@@ -50,9 +50,8 @@ admin.add_view(AuthModelView(models.User, models.db.session))
 admin.add_view(AuthModelView(models.Venue, models.db.session))
 
 
-def init_for(env):
-    coaster.app.init_app(app, env)
-    baseframe.init_app(app, requires=['jquery.form', 'baseframe-networkbar', 'geekup'])
-    lastuser.init_app(app)
-    lastuser.init_usermanager(UserManager(models.db, models.User))
-    mail.init_app(app)
+coaster.app.init_app(app)
+baseframe.init_app(app, requires=['jquery.form', 'baseframe-networkbar', 'geekup'])
+lastuser.init_app(app)
+lastuser.init_usermanager(UserManager(models.db, models.User))
+mail.init_app(app)
