@@ -1,7 +1,11 @@
 #!/usr/bin/env python
-from geekup import app, init_for
+import sys
+from geekup import app
 from geekup.models import db
 
-init_for('dev')
 db.create_all()
-app.run('0.0.0.0', 4000, debug=True)
+try:
+    port = int(sys.argv[1])
+except (IndexError, ValueError):
+    port = 4000
+app.run('0.0.0.0', port)
