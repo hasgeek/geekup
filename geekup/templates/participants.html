@@ -4,7 +4,7 @@
 {% block content %}
 <h2><a href="{{ url_for('eventpage', year=event.year, eventname=event.name) }}">{{ event }}</a></h2>
 <article>
-<h3>Confirmed participants (Total count: {{ confirmed_participants | length }})</h3>
+<h3>Confirmed participants ({{ confirmed_participants | length }})</h3>
 <table>
   <tr>
     <th>Participant Name</th>
@@ -21,7 +21,7 @@
 </table>
 </article>
 <article>
-<h3>Unconfirmed Participants (Total count: {{ unconfirmed_participants | length }})</h3>
+<h3>Unconfirmed Participants ({{ unconfirmed_participants | length }})</h3>
 <table>
   <tr>
     <th>Participant Name</th>
