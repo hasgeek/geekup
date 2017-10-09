@@ -4,14 +4,14 @@
 {% block content %}
 <h2><a href="{{ url_for('eventpage', year=event.year, eventname=event.name) }}">{{ event }}</a></h2>
 <article>
-<h3>Confirmed participants</h3>
+<h3>Confirmed participants (Total count: {{ confirmed_participants | length }})</h3>
 <table>
   <tr>
     <th>Participant Name</th>
     <th>Email</th>
     <th>RSVP</th>
   </tr>
-  {% for participant in participants %}
+  {% for participant in confirmed_participants %}
   {% if participant.email_status %}
   <tr>
     <td>{{ participant.fullname }}</td>
@@ -23,13 +23,13 @@
 </table>
 </article>
 <article>
-<h3>Unconfirmed Participants</h3>
+<h3>Unconfirmed Participants (Total count: {{ unconfirmed_participants | length }})</h3>
 <table>
   <tr>
     <th>Participant Name</th>
     <th>Email</th>
   </tr>
-  {% for participant in participants %}
+  {% for participant in unconfirmed_participants %}
   {% if not participant.email_status %}
   <tr>
     <td>{{ participant.fullname }}</td>
@@ -40,4 +40,3 @@
 </table>
 </article>
 {% endblock %}
-

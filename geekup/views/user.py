@@ -143,6 +143,7 @@ def participant_list(year, eventname):
     context = {
         'event': event,
         'rsvp': RSVP_STATUS,
-        'participants': participants,
+        'confirmed_participants': [participant for participant in participants if participant.email_status],
+        'unconfirmed_participants': [participant for participant in participants if not participant.email_status],
     }
     return render_template('participants.html', **context)
