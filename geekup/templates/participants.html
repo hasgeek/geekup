@@ -12,13 +12,11 @@
     <th>RSVP</th>
   </tr>
   {% for participant in confirmed_participants %}
-  {% if participant.email_status %}
   <tr>
     <td>{{ participant.fullname }}</td>
     <td>{{ participant.email }}</td>
     <td>{{ rsvp[participant.rsvp][1] }}</td>
   </tr>
-  {% endif %}
   {% endfor %}
 </table>
 </article>
@@ -30,12 +28,10 @@
     <th>Email</th>
   </tr>
   {% for participant in unconfirmed_participants %}
-  {% if not participant.email_status %}
   <tr>
     <td>{{ participant.fullname }}</td>
     <td>{{ participant.email }}</td>
   </tr>
-  {% endif %}
   {% endfor %}
 </table>
 </article>
