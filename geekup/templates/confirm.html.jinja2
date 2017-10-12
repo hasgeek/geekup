@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layout.html.jinja2" %}
 {% block title %}{{ participant.event.title|e }}{% endblock %}
 
 {% block header %}
@@ -13,7 +13,7 @@
     #container, footer {
       max-width: 100%;
     }
-    
+
     footer {
       text-align: left;
     }
@@ -26,17 +26,17 @@
   <a href="https://twitter.com/share?url={{ url_for('eventpage', year=participant.event.year, eventname=participant.event.name, _external=True) }}" class="twitter-share-button" data-url="{{ url_for('eventpage', year=participant.event.year, eventname=participant.event.name, _external=True) }}" data-text="{{ tweet }}">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 <div id="rsvp-form">
-{% include 'rsvpform.html' %}
+{% include 'rsvpform.html.jinja2' %}
 </div>
 {% endblock %}
 {% block footerscripts %}
 
 <!-- Ajax form -->
-{% from "macros.html" import ajaxform -%}
+{% from "macros.html.jinja2" import ajaxform -%}
 {{ ajaxform('regform', request, True) }}
 
 <!-- Ajax form -->
-{% from "macros.html" import ajaxform %}
+{% from "macros.html.jinja2" import ajaxform %}
 {{ ajaxform('rsvpform', request, True) }}
 
 {% endblock %}

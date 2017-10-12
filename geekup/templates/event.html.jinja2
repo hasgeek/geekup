@@ -1,5 +1,5 @@
-{% extends "layout.html" %}
-{% from 'macros.html' import ajaxform, render_schedule %}
+{% extends "layout.html.jinja2" %}
+{% from 'macros.html.jinja2' import ajaxform, render_schedule %}
 {% block title %}{{ event.title }}{% endblock %}
 {% block main %}
 <article id="about">
@@ -51,7 +51,7 @@
         </p>
       </div>
       <div id="register-form">
-        {% include 'regform.html' %}
+        {% include 'regform.html.jinja2' %}
       </div>
       {% endif %}
     </div>
@@ -87,7 +87,7 @@
 {% block footerscripts %}
 
 <!-- Ajax form -->
-{% from "macros.html" import ajaxform -%}
+{% from "macros.html.jinja2" import ajaxform -%}
 {{ ajaxform('regform', request, True) }}
 
   <script type="text/javascript">

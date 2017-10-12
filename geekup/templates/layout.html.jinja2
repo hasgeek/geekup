@@ -1,4 +1,4 @@
-{% from "baseframe/components.html" import networkbar with context -%}
+{% from "baseframe/components.html.jinja2" import networkbar with context -%}
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
@@ -7,7 +7,7 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 <head>
   <!--
-  
+
   Does this website look familiar? That's because it was adapted from
   two earlier websites: Scaling PHP in the Cloud (https://phpcloud.hasgeek.com)
   and DocType HTML5 (http://www.doctypehtml5.in).
