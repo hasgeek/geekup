@@ -55,7 +55,7 @@ def eventpage(year, eventname, regform=None):
             'venue_description': Markup(event.venue.description),
             'venue_address': Markup(event.venue.address),
             }
-    return render_template('event.html', **context)
+    return render_template('event.html.jinja2', **context)
 
 
 @app.route('/<year>/<eventname>', methods=['POST'])
@@ -80,10 +80,10 @@ def register(year, eventname):
             mail.send(msg)
             participant.email_sent = True
             db.session.commit()
-        return render_template('regsuccess.html')
+        return render_template('regsuccess.html.jinja2')
     else:
         if request.is_xhr:
-            return render_template('regform.html',
+            return render_template('regform.html.jinja2',
                                    regform=form, ajax_re_register=True)
         else:
             flash("Please check your details and try again.", 'error')
@@ -106,7 +106,7 @@ def confirm_email(pid, key, rsvpform=None):
             'rsvpform': rsvpform,
             'tweet': tweet,
         }
-        return render_template('confirm.html', **context)
+        return render_template('confirm.html.jinja2', **context)
     return redirect(url_for('index'))
 
 
@@ -118,7 +118,7 @@ def rsvp(pid, key):
         if form.validate_on_submit():
             participant.rsvp = form.data['rsvp']
             db.session.commit()
-            return render_template('rsvpsuccess.html')
+            return render_template('rsvpsuccess.html.jinja2')
         else:
             if request.is_xhr:
                 context = {
@@ -126,7 +126,7 @@ def rsvp(pid, key):
                     'participant': participant,
                      'ajax_re_register': True,
                 }
-                return render_template('rsvpform.html', **context)
+                return render_template('rsvpform.html.jinja2', **context)
             else:
                 flash("Please check your details and try again.", 'error')
                 return confirm_email(pid, key, rsvpform=form)
@@ -146,4 +146,4 @@ def participant_list(year, eventname):
         'confirmed_participants': [participant for participant in participants if participant.email_status],
         'unconfirmed_participants': [participant for participant in participants if not participant.email_status],
     }
-    return render_template('participants.html', **context)
+    return render_template('participants.html.jinja2', **context)
