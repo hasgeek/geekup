@@ -1,4 +1,4 @@
-{% from 'macros.html' import renderform, ajaxform %}
+{% from 'macros.html.jinja2' import renderform, ajaxform %}
 {{ renderform(regform, 'venueregform', url_for('admin_venue', edition=edition), 'Register') }}
 {% if ajax_re_register %}
   {{ ajaxform('venueregform') }}
