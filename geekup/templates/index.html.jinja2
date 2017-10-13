@@ -1,9 +1,9 @@
-{% extends "layout.html" %}
-{% from 'macros.html' import ajaxform %}
+{% extends "layout.html.jinja2" %}
+{% from 'macros.html.jinja2' import ajaxform %}
 {% block title %}Geekup{% endblock %}
 {% block content %}
 {% for event in events %}
 <h2><a href="{{ url_for('eventpage', event=event.name) }}">{{ event }}</a></h2>
-{{ event.description | safe }}  
+{{ event.description | safe }}
 {% endfor %}
 {% endblock %}

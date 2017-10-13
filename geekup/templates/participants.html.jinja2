@@ -1,5 +1,5 @@
-{% extends "layout.html" %}
-{% from 'macros.html' import ajaxform %}
+{% extends "layout.html.jinja2" %}
+{% from 'macros.html.jinja2' import ajaxform %}
 {% block title %}GeekUp{% endblock %}
 {% block content %}
 <h2><a href="{{ url_for('eventpage', year=event.year, eventname=event.name) }}">{{ event }}</a></h2>

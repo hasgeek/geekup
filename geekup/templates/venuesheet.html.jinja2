@@ -1,6 +1,6 @@
-{# Approve participants #}
-{% extends "layout.html" %}
-{% block title %}Approve Participants{% endblock %}
+{# Sign-in sheet #}
+{% extends "layout.html.jinja2" %}
+{% block title %}At Venue Sign-in{% endblock %}
 
 {% block header %}
   <h1>{{ self.title() }}</h1>
@@ -33,33 +33,22 @@
     <tbody>
       {% for i, p in enumerate(participants) -%}
         <tr>
-          <td rowspan="2" class="wide">{{ i+1 }}</td>
+          <td>{{ i+1 }}</td>
           <td>{{ utc.localize(p.regdate).astimezone(tz).strftime('%Y-%m-%d %H:%M')|e }}</td>
           <td><strong>{{ p.fullname|e }}</strong></td>
-          <td>{{ p.email|e }}</td>
+          <td>{{ hideemail.sub('...@', p.email)|e }}</td>
           <td>{{ p.company|e }}</td>
           <td>{{ p.jobtitle|e }}</td>
-          <td rowspan="2" class="wide">
-            {%- if p.approved -%}
-              {% if config['DEBUG'] %}
-                <form id="approve{{ i }}" action="{{ url_for('admin_approve', edition=edition) }}" method="POST">
-                  Approved
-                  <input type="hidden" name="id" value="{{ p.id }}"/>
-                  <input type="submit" name="action.undo" value="Undo"/>
-                </form>
-              {% else %}
-                Approved
-              {% endif %}
+          <td>
+            {%- if p.attended -%}
+                Signed in
             {%- else -%}
-            <form id="approve{{ i }}" action="{{ url_for('admin_approve', edition=edition) }}" method="POST">
+            <form id="attend{{ i }}" action="{{ url_for('admin_venuesheet', edition=edition) }}" method="POST">
               <input type="hidden" name="id" value="{{ p.id }}"/>
-              <input type="submit" name="action.approve" value="Approve"/>
+              <input type="submit" name="action.signin" value="Sign in"/>
             </form>
             {%- endif -%}
           </td>
-        </tr>
-        <tr>
-          <td colspan="5" class="wide">{{ p.reason|e }}</td>
         </tr>
       {%- endfor %}
     </tbody>
@@ -75,7 +64,7 @@
   <script type="text/javascript">
     $(function() {
       {% for i,p in enumerate(participants) -%}
-        $("{{ '#approve%d' % i }}").ajaxForm({target: "{{ '#approve%d' % i }}", replaceTarget: true});
+        $("{{ '#attend%d' % i }}").ajaxForm({target: "{{ '#attend%d' % i }}", replaceTarget: true});
       {% endfor -%}
     });
   </script>

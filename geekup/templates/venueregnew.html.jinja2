@@ -1,5 +1,5 @@
-{% extends "layout.html" %}
-{% from 'macros.html' import renderform, ajaxform %}
+{% extends "layout.html.jinja2" %}
+{% from 'macros.html.jinja2' import renderform, ajaxform %}
 {% block title %}DocType HTML5 At Venue Registration{% endblock %}
 
 {% block pageheaders %}
@@ -22,7 +22,7 @@
     Hello there! We didn’t recognise you. Would you like to register?
     Or, <a href="{{ url_for('admin_venue', edition=edition) }}">search again</a>.
   </p>
-  {% include 'venueregform.html' %}
+  {% include 'venueregform.html.jinja2' %}
 {% endblock %}
 
 {% block footer %}
