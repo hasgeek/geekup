@@ -3,7 +3,7 @@ Flask-Sqlalchemy==2.3.2
 Flask-Assets==0.12
 Flask-Mail==0.9.1
 Flask-WTF==0.14.2
-pytz
+pytz==2018.4
 markdown
 pygooglechart
 https://github.com/hasgeek/coaster/zipball/master
