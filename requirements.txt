@@ -9,6 +9,6 @@ pygooglechart==0.4.0
 https://github.com/hasgeek/coaster/zipball/master
 https://github.com/hasgeek/flask-lastuser/zipball/master
 https://github.com/hasgeek/baseframe/zipball/master
-jsmin
+jsmin==2.2.2
 greatape
 Flask-Admin
