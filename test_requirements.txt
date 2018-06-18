@@ -1,5 +1,5 @@
-coverage
-nose
-mock
-coveralls
+coverage==4.5.1
+nose==1.3.7
+mock==2.0.0
+coveralls==1.3.0
 
