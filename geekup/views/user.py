@@ -2,6 +2,7 @@
 # -*- coding: utf8 -*-
 
 from datetime import date
+from baseframe import request_is_xhr
 from geekup import app, mail
 from geekup.models import *
 from geekup.forms import RegisterForm, RsvpForm, RSVP_STATUS
@@ -82,7 +83,7 @@ def register(year, eventname):
             db.session.commit()
         return render_template('regsuccess.html.jinja2')
     else:
-        if request.is_xhr:
+        if request_is_xhr():
             return render_template('regform.html.jinja2',
                                    regform=form, ajax_re_register=True)
         else:
@@ -120,7 +121,7 @@ def rsvp(pid, key):
             db.session.commit()
             return render_template('rsvpsuccess.html.jinja2')
         else:
-            if request.is_xhr:
+            if request_is_xhr():
                 context = {
                     'rsvpform': form,
                     'participant': participant,
